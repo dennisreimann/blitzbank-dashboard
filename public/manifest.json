@@ -1,0 +1,15 @@
+{
+  "name": "Blitzbank Dashboard",
+  "short_name": "Blitzbank",
+  "icons": [
+    {
+      "src": "./img/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#003366",
+  "theme_color": "#F39E39"
+}
