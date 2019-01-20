@@ -1,23 +1,27 @@
-const { join, resolve } = require('path')
+const { resolve } = require('path')
 const express = require('express')
+const basicAuth = require('express-basic-auth')
 const history = require('connect-history-api-fallback')
 const api = require('./api')
 
-const { NODE_ENV, PORT } = process.env
+const { NODE_ENV, PORT, AUTH_USERNAME, AUTH_PASSWORD } = process.env
 const isDevelopment = NODE_ENV === 'development'
 const server = express()
 
 // Security
 server.disable('x-powered-by')
 
-// Static
-const ONE_YEAR = 31536000000
-const distPath = resolve(__dirname, '../../dist')
-const staticConf = isDevelopment ? {} : { maxAge: ONE_YEAR, etag: false };
+server.use(basicAuth({
+  users: { [AUTH_USERNAME]: AUTH_PASSWORD },
+  challenge: true,
+  realm: 'Dashboard'
+}))
 
-['css', 'img', 'js'].forEach(dir => {
-  server.use(express.static(join(distPath, dir), staticConf))
-})
+// Static
+const publicPath = resolve(__dirname, '../..', isDevelopment ? 'public' : 'dist')
+const staticConf = isDevelopment ? {} : { maxAge: '1y', etag: false }
+
+server.use(express.static(publicPath, staticConf))
 
 // API
 server.use('/api', api)

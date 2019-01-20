@@ -3,7 +3,7 @@ const headers = {
   'content-type': 'application/json'
 }
 
-const credentials = 'omit'
+const credentials = 'include'
 
 const get = async (path) => {
   const url = `/api/${path}`
