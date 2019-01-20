@@ -3,6 +3,7 @@
     <HelloWorld msg="Welcome to the Blitzbank"/>
 
     <pre>{{ info }}</pre>
+    <pre>{{ sys }}</pre>
   </div>
 </template>
 
@@ -17,14 +18,14 @@ export default {
 
   data () {
     return {
-      info: null
+      info: null,
+      sys: null
     }
   },
 
   async mounted () {
-    const result = await API.get('info')
-
-    this.info = result
+    this.info = await API.get('info')
+    this.sys = await API.get('sys')
   }
 }
 </script>
