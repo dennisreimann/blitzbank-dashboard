@@ -5,16 +5,11 @@
   "version": "0.1.0",
   "license": "UNLICENSED",
   "author": "Dennis Reimann",
-  "config": {
-    "server": {
-      "port": "4000"
-    }
-  },
   "scripts": {
     "start": "rimraf assets dist && npm-run-all --parallel start:dev:*",
     "start:dev:ui": "vue-cli-service serve",
-    "start:dev:server": "cross-env NODE_ENV=development PORT=$npm_package_config_server_port nodemon $npm_package_main",
-    "start:prod": "cross-env NODE_ENV=production PORT=$npm_package_config_server_port node $npm_package_main",
+    "start:dev:server": "cross-env NODE_ENV=development nodemon -r dotenv/config $npm_package_main",
+    "start:prod": "cross-env NODE_ENV=production node -r dotenv/config $npm_package_main",
     "build": "vue-cli-service build",
     "ln-check": "node src/index.js",
     "lint": "vue-cli-service lint",
@@ -22,16 +17,20 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "@radar/lnrpc": "^0.5.1-beta",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
     "connect-history-api-fallback": "1.6.0",
     "cross-env": "5.2.0",
     "dotenv": "^6.2.0",
     "express": "4.16.4",
     "express-basic-auth": "^1.1.6",
-    "ln-service": "34.2.0",
+    "ln-service": "34.2.1",
+    "morgan": "^1.9.1",
     "npm-run-all": "4.1.5",
-    "register-service-worker": "1.6.0",
+    "register-service-worker": "1.6.1",
     "systeminformation": "^4.0.10",
-    "vue": "2.6.4",
+    "vue": "2.6.6",
     "vue-router": "3.0.2",
     "vuex": "3.1.0"
   },
@@ -53,7 +52,7 @@
     "lint-staged": "8.1.3",
     "nodemon": "^1.18.10",
     "rimraf": "^2.6.3",
-    "vue-template-compiler": "2.6.4",
+    "vue-template-compiler": "2.6.6",
     "webpack": "^4.29.3"
   },
   "gitHooks": {

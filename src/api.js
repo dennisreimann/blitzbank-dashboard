@@ -1,30 +1,22 @@
+import axios from 'axios'
+
 const headers = {
   accept: 'application/json',
   'content-type': 'application/json'
 }
-
-const credentials = 'include'
-
-const get = async (path) => {
-  const url = `/api/${path}`
-  const init = { method: 'GET', headers, credentials }
-  const req = new Request(url)
-  const result = await fetch(req, init)
-
-  return result.json()
+const config = {
+  headers,
+  withCredentials: true
 }
 
-const post = async (path, payload = {}) => {
-  const url = `/api/${path}`
-  const body = JSON.stringify(payload)
-  const init = { method: 'POST', headers, credentials, body }
-  const req = new Request(url)
-  const result = await fetch(req, init)
-
-  return result.json()
-}
+const post = (path, payload = {}) => axios.post(`/api/${path}`, payload, config)
+const put = (path, payload = {}) => axios.put(`/api/${path}`, payload, config)
+const del = path => axios.delete(`/api/${path}`, config)
+const get = path => axios.get(`/api/${path}`, config)
 
 export default {
   get,
-  post
+  post,
+  put,
+  del
 }
