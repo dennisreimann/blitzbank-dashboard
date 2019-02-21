@@ -1,14 +1,26 @@
 import Vue from 'vue'
 import router from './router'
 import createStore from './store'
-import API from './api'
-import App from './components/App.vue'
-import './registerServiceWorker'
+import App from './vue/App'
+import API from './lib/api'
+import './lib/registerServiceWorker'
 
 Vue.config.productionTip = false
 
-const mount = '#app';
+const mount = '#app'
 
+// Automatic Global Registration of Base Components
+// https://vuejs.org/v2/guide/components-registration.html#Automatic-Global-Registration-of-Base-Components
+const requireComponent = require.context('./vue/form', false, /\w+\.vue$/)
+
+requireComponent.keys().forEach(fileName => {
+  const componentConfig = requireComponent(fileName)
+  const componentName = fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
+
+  Vue.component(componentName, componentConfig.default || componentConfig)
+});
+
+// Load info via API, if that works init the app
 (async () => {
   try {
     const { data: info } = await API.get('lnd/info')

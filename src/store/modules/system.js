@@ -1,7 +1,7 @@
-import API from '../../api'
+import API from '../../lib/api'
 
 const state = {
-  info: {}
+  info: null
 }
 
 const getters = {

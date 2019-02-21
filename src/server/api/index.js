@@ -1,10 +1,9 @@
 const { Router } = require('express')
-const lnd = require('./lnd')
-const sys = require('./sys')
 
 const router = Router()
 
-router.use('/lnd', lnd)
-router.use('/sys', sys)
+router.use('/btc', require('./btc'))
+router.use('/lnd', require('./lnd'))
+router.use('/sys', require('./sys'))
 
 module.exports = router
