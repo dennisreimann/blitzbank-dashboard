@@ -1,14 +1,21 @@
+/*
+  this file is used to start the server in production mode:
+  uses the shared server config for the API, adds production
+  config, mounts the UI and launches an express server.
+*/
 const { resolve } = require('path')
 const assert = require('assert')
-const morgan = require('morgan')
-const express = require('express')
 const basicAuth = require('express-basic-auth')
 const history = require('connect-history-api-fallback')
-const bodyParser = require('body-parser')
-
-const { NODE_ENV, SERVER_PORT, AUTH_USERNAME, AUTH_PASSWORD } = process.env
-const isDevelopment = NODE_ENV === 'development'
+const express = require('express')
+const configureAPI = require('./configure')
 const server = express()
+
+const {
+  SERVER_PORT = 4000,
+  AUTH_USERNAME,
+  AUTH_PASSWORD
+} = process.env
 
 // Security
 assert(AUTH_USERNAME && AUTH_PASSWORD, 'Provide the AUTH_USERNAME and AUTH_PASSWORD environment variables.')
@@ -21,16 +28,13 @@ server.use(basicAuth({
 
 server.disable('x-powered-by')
 
-// Logging
-server.use(morgan(isDevelopment ? 'dev' : 'combined'))
-
 // API
-server.use(bodyParser.json())
-server.use('/api', require('./api'))
+configureAPI(server)
 
 // Dashboard UI
-const publicPath = resolve(__dirname, '../..', isDevelopment ? 'public' : 'dist')
-const staticConf = isDevelopment ? {} : { maxAge: '1y', etag: false }
+// https://cli.vuejs.org/guide/deployment.html
+const publicPath = resolve(__dirname, '../../dist')
+const staticConf = { maxAge: '1y', etag: false }
 
 server.use(express.static(publicPath, staticConf))
 server.use('/', history())

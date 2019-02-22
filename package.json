@@ -6,12 +6,9 @@
   "license": "UNLICENSED",
   "author": "Dennis Reimann",
   "scripts": {
-    "start": "rimraf assets dist && npm-run-all --parallel start:dev:*",
-    "start:dev:ui": "vue-cli-service serve",
-    "start:dev:server": "cross-env NODE_ENV=development nodemon -r dotenv/config $npm_package_main",
+    "start": "rimraf assets dist && vue-cli-service serve",
     "start:prod": "cross-env NODE_ENV=production node -r dotenv/config $npm_package_main",
     "build": "vue-cli-service build",
-    "ln-check": "node src/index.js",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e"
@@ -28,10 +25,9 @@
     "express-basic-auth": "^1.1.6",
     "ln-service": "34.3.1",
     "morgan": "^1.9.1",
-    "npm-run-all": "4.1.5",
     "register-service-worker": "1.6.2",
     "systeminformation": "^4.0.10",
-    "vue": "2.6.6",
+    "vue": "2.6.7",
     "vue-router": "3.0.2",
     "vuex": "3.1.0"
   },
@@ -53,7 +49,7 @@
     "lint-staged": "8.1.4",
     "nodemon": "^1.18.10",
     "rimraf": "^2.6.3",
-    "vue-template-compiler": "2.6.6",
+    "vue-template-compiler": "2.6.7",
     "webpack": "^4.29.5"
   },
   "gitHooks": {

@@ -1,9 +1,8 @@
+const configureAPI = require('./src/server/configure')
+
 module.exports = {
   devServer: {
-    proxy: {
-      '^/api': {
-        target: 'http://localhost:4000'
-      }
-    }
+    // https://webpack.js.org/configuration/dev-server/#devserverbefore
+    before: configureAPI
   }
 }
