@@ -1,14 +1,34 @@
 {
-  "private": true,
   "name": "@blitzbank/dashboard",
   "description": "A dashboard for your Bitcoind/LND full node.",
   "version": "0.1.0",
-  "license": "UNLICENSED",
-  "author": "Dennis Reimann",
+  "license": "MIT",
+  "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
+  "homepage": "https://github.com/dennisreimann/blitzbank-dashboard",
+  "bugs": "https://github.com/dennisreimann/blitzbank-dashboard/issues",
+  "repository": "dennisreimann/blitzbank-dashboard",
+  "engines": {
+    "node": ">=10.15"
+  },
+  "main": "src/server/index.js",
+  "files": [
+    "dist",
+    "src/server"
+  ],
+  "keywords": [
+    "bitcoin",
+    "lnd",
+    "lightning",
+    "lightning-network",
+    "fullnode",
+    "dashboard",
+    "admin"
+  ],
   "scripts": {
     "start": "rimraf assets dist && nodemon -r dotenv/config --exec 'vue-cli-service serve'",
     "start:prod": "cross-env NODE_ENV=production node -r dotenv/config $npm_package_main",
     "build": "vue-cli-service build",
+    "release": "yarn lint && yarn test && yarn build && yarn publish",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e"
@@ -28,7 +48,7 @@
     "ln-service": "34.3.1",
     "morgan": "^1.9.1",
     "register-service-worker": "1.6.2",
-    "systeminformation": "^4.0.10",
+    "systeminformation": "^4.0.11",
     "vue": "2.6.7",
     "vue-router": "3.0.2",
     "vuex": "3.1.0"
@@ -66,6 +86,5 @@
       "vue-cli-service lint",
       "git add"
     ]
-  },
-  "main": "src/server/index.js"
+  }
 }
