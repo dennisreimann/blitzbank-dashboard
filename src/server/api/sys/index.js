@@ -1,19 +1,17 @@
 const { Router } = require('express')
-const si = require('systeminformation')
-
 const router = Router()
+const system = require('./service')
 
 router.get('/', async (req, res) => {
-  const [time, mem, disk, network] = await Promise.all([
-    si.time(),
-    si.mem(),
-    si.diskLayout(),
-    si.networkStats()
-  ])
-
   try {
-    const result = { time, mem, disk, network }
-    res.json(result)
+    const [osInfo, info, memory, disk, network] = await Promise.all([
+      system.retrieveOsInfo(),
+      system.retrieveInfo(),
+      system.retrieveMemory(),
+      system.retrieveDisk(),
+      system.retrieveNetwork()
+    ])
+    res.json({ os: osInfo, info, memory, disk, network })
   } catch (err) {
     const { message } = err
     res.status(500).send(message)

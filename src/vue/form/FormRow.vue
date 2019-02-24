@@ -1,19 +1,29 @@
 <template>
   <div
     class="row"
-    :class="{invalid: (typeof isValid === 'boolean' && !isValid)}"
+    :class="{
+      valid: (typeof isValid === 'boolean' && isValid),
+      invalid: (typeof isValid === 'boolean' && !isValid)
+    }"
   >
     <label :for="id">
       {{ label }}
+      <span
+        v-if="hint"
+        class="hint"
+      >
+        {{ hint }}
+      </span>
+      <span
+        v-if="message"
+        class="message"
+      >
+        {{ message }}
+      </span>
     </label>
+
     <div class="inputs">
       <slot />
-    </div>
-    <div
-      v-if="message"
-      class="message"
-    >
-      {{ message }}
     </div>
   </div>
 </template>
@@ -28,6 +38,10 @@ export default {
     label: {
       type: String,
       required: true
+    },
+    hint: {
+      type: String,
+      default: null
     },
     message: {
       type: String,
@@ -48,6 +62,7 @@ export default {
 label {
   display: block;
   margin-bottom: var(--space-s);
+  color: var(--color-neutral-60);
 }
 
 .inputs {
@@ -58,11 +73,14 @@ label {
   margin-left: var(--space-m);
 }
 
+.hint,
 .message {
+  display: block;
   margin-top: var(--space-s);
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"],
 select,
 textarea {
@@ -73,21 +91,27 @@ textarea {
 }
 
 input[type="text"]:focus,
+input[type="email"]:focus,
 input[type="password"]:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--color-dark);
+  border-color: var(--color-vibe-90);
 }
 
-.invalid {
-  color: var(--color-invalid);
+.valid .message {
+  color: var(--color-success);
+}
+
+.invalid .message {
+  color: var(--color-failure);
 }
 
 .invalid input[type="text"],
+.invalid input[type="email"],
 .invalid input[type="password"],
 .invalid select,
 .invalid textarea {
-  border-color: var(--color-invalid);
+  border-color: var(--color-failure);
 }
 
 </style>

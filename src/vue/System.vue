@@ -1,32 +1,23 @@
 <template>
-  <section>
-    <h1>System Information</h1>
+  <main>
+    <h1>Node Information</h1>
 
-    <pre v-if="info">{{ info }}</pre>
-    <Loading v-else />
-  </section>
+    <LndInfo />
+    <BtcInfo />
+    <SysInfo />
+  </main>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import Loading from './components/Loading'
+import BtcInfo from './sections/BtcInfo'
+import LndInfo from './sections/LndInfo'
+import SysInfo from './sections/SysInfo'
 
 export default {
   components: {
-    Loading
-  },
-
-  computed: mapGetters('system', ['info']),
-
-  async mounted () {
-    this.loadInfo()
-  },
-
-  methods: mapActions('system', {
-    loadInfo: 'info'
-  })
+    BtcInfo,
+    LndInfo,
+    SysInfo
+  }
 }
 </script>
-
-<style scoped>
-</style>

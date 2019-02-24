@@ -51,14 +51,14 @@ button:focus {
 }
 
 .submit {
-  background: var(--color-dark);
-  border-color: var(--color-dark);
+  background: var(--color-vibe-90);
+  border-color: var(--color-vibe-90);
   color: #FFF;
 }
 
 .submit:hover,
 .submit:focus {
-  color: var(--color-dark);
+  color: var(--color-vibe-90);
   background-color: yellow;
 }
 </style>

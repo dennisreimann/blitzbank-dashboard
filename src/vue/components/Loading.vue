@@ -1,12 +1,18 @@
 <template>
   <div class="loading">
     <div /><div /><div /><div />
+    <div
+      aria-live="assertive"
+      role="alert"
+      class="visually-hidden"
+    >
+      Loading data.
+    </div>
   </div>
 </template>
 
 <style scoped>
 .loading {
-  --dot-size: 10px;
   --animation-duration: .6s;
   --height: calc(var(--dot-size) * 1.5);
   display: inline-block;
@@ -21,7 +27,7 @@
   width: var(--dot-size);
   height: var(--dot-size);
   border-radius: 50%;
-  background: var(--color-dark);
+  background: var(--color-neutral-40);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 
@@ -48,9 +54,11 @@
 @keyframes loading1 {
   0% {
     transform: scale(0);
+    opacity: 0;
   }
   100% {
     transform: scale(1);
+    opacity: 1;
   }
 }
 @keyframes loading2 {
@@ -64,9 +72,11 @@
 @keyframes loading3 {
   0% {
     transform: scale(1);
+    opacity: 1;
   }
   100% {
     transform: scale(0);
+    opacity: 0;
   }
 }
 </style>

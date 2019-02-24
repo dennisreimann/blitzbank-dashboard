@@ -6,7 +6,7 @@
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
-module.exports = server => {
+module.exports = (server, devServer) => {
   // Logging
   const isDevelopment = process.env.NODE_ENV === 'development'
   server.use(morgan(isDevelopment ? 'dev' : 'combined'))

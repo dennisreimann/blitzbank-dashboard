@@ -1,39 +1,43 @@
 <template>
   <section>
     <h2>{{ peers.length }} Peers</h2>
-    <ul v-if="peers.length">
-      <li
-        v-for="peer in peers"
-        :key="peer.publicKey"
-      >
-        {{ peer.publicKey }} @ {{ peer.socket }}
-        <Button
-          title="🤜 Remove"
-          @click.native="removePeer(peer.publicKey)"
-        />
-      </li>
-    </ul>
 
-    <form @submit.prevent="addPeer">
-      <Fieldset title="🤝 Connect peer">
-        <FormRow
-          id="peerAddress"
-          label="Address"
-          :is-valid="peerAddress.isValid"
-          :message="peerAddress.message"
+    <template v-if="peers">
+      <ul v-if="peers.length">
+        <li
+          v-for="peer in peers"
+          :key="peer.publicKey"
         >
-          <input
-            id="peerAddress"
-            v-model="peerAddress.value"
-            placeholder="pubkey@host"
-            type="text"
-          >
+          {{ peer.publicKey }} @ {{ peer.socket }}
           <Button
-            type="submit"
-            title="🤝 Connect"
+            title="🤜 Remove"
+            @click.native="removePeer(peer.publicKey)"
           />
-        </FormRow>
-      </Fieldset>
+        </li>
+      </ul>
+    </template>
+    <Loading v-else />
+
+    <h3>🤝 Connect peer</h3>
+    <form @submit.prevent="addPeer">
+      <FormRow
+        id="peerAddress"
+        label="Address"
+        :is-valid="peerAddress.isValid"
+        :message="peerAddress.message"
+      >
+        <input
+          id="peerAddress"
+          ref="peerAddressInput"
+          v-model="peerAddress.value"
+          placeholder="pubkey@host"
+          type="email"
+        >
+        <Button
+          type="submit"
+          title="🤝 Connect"
+        />
+      </FormRow>
     </form>
   </section>
 </template>
@@ -41,8 +45,13 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { field } from '../../lib/form'
+import Loading from '../components/Loading'
 
 export default {
+  components: {
+    Loading
+  },
+
   data () {
     return {
       peerAddress: field()
@@ -74,6 +83,7 @@ export default {
         const { response } = error
         this.peerAddress.message = response.data
         this.peerAddress.isValid = false
+        this.$refs.peerAddressInput.focus()
         console.error(response ? response.data : error.message)
       }
     }

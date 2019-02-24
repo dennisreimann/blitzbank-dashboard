@@ -1,5 +1,6 @@
 # Blitzbank Dashboard
 
+Here‘s to the #reckless! ⚡️
 A dashboard for your Bitcoind/LND full node.
 
 ## Setup

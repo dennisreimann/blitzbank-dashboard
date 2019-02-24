@@ -47,15 +47,18 @@ a {
   width: var(--nav-size);
   height: var(--nav-size);
   line-height: 100%;
+  border-left: var(--space-s) solid transparent;
+  border-right: var(--space-s) solid transparent;
 }
 
 a:hover,
 a:focus {
-  background: rgba(255, 255, 255, .1);
+  background-color: var(--color-vibe-80);
 }
 
 .router-link-active {
-  background: rgba(255, 255, 255, .25) !important;
+  background-color: var(--color-vibe-80);
+  border-left-color: var(--color-vibe-30);
 }
 
 .icon {

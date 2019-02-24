@@ -7,12 +7,12 @@
       class="item home"
       exact
     />
-    <NavItem
+    <!-- <NavItem
       to="/peers"
       icon="🦸‍♂️"
       title="Peers"
       class="item peers"
-    />
+    /> -->
     <NavItem
       to="/system"
       icon="⚙️"
@@ -42,7 +42,7 @@ nav {
   width: var(--nav-size);
   display: flex;
   flex-direction: column;
-  background: var(--color-dark);
+  background: var(--color-vibe-90);
   color: #fff;
   padding: var(--space-l) 0;
 }

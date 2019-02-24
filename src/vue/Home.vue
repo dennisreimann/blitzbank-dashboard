@@ -1,21 +1,21 @@
 <template>
-  <section>
+  <main>
     <h1>{{ info.alias }}</h1>
 
-    <LndInfo />
-    <BtcInfo />
-  </section>
+    <LndPanel />
+    <BtcPanel />
+  </main>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import LndInfo from './sections/LndInfo'
-import BtcInfo from './sections/BtcInfo'
+import LndPanel from './components/LndPanel'
+import BtcPanel from './components/BtcPanel'
 
 export default {
   components: {
-    LndInfo,
-    BtcInfo
+    LndPanel,
+    BtcPanel
   },
 
   computed: {

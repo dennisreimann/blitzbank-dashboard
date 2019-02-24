@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <main>
     <h1>Peers &amp; Channels</h1>
-    <Channels />
     <Peers />
-  </section>
+    <Channels />
+  </main>
 </template>
 
 <script>

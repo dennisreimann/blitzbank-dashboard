@@ -18,7 +18,7 @@ export default {
 
 <style scoped>
 fieldset {
-  border: 5px solid var(--color-dark);
+  border: 5px solid var(--color-vibe-90);
   padding: var(--space-l);
 }
 
