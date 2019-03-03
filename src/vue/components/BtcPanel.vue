@@ -2,38 +2,47 @@
   <section>
     <h2>Bitcoin <small v-if="blockchainInfo">{{ blockchainInfo.chain }}net</small></h2>
 
-    <template v-if="blockchainInfo">
-      <p
-        v-if="isSynced"
-        class="sync"
+    <AttributeList v-if="blockchainInfo">
+      <Attribute
+        label="Sync Status"
       >
-        <Dot status="synced" />
-        Fully synced
-      </p>
-      <p
-        v-else
-        class="sync"
-      >
-        <Dot status="syncing" />
-        Sync in progress
-        <Progress
-          class="progress"
-          :percent="verificationPercent"
-        />
-      </p>
-    </template>
+        <p
+          v-if="isSynced"
+          class="sync"
+        >
+          <Dot status="synced" />
+          Fully synced
+        </p>
+        <p
+          v-else
+          class="sync"
+        >
+          <Dot status="syncing" />
+          {{ blockchainInfo.initialblockdownload ? "Initial sync" : "Sync" }}
+          in progress
+          <Progress
+            class="progress"
+            :percent="verificationPercent"
+          />
+        </p>
+      </Attribute>
+    </AttributeList>
     <Loading v-else />
   </section>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import AttributeList from '../components/AttributeList'
+import Attribute from '../components/Attribute'
 import Dot from '../components/Dot'
 import Loading from '../components/Loading'
 import Progress from '../components/Progress'
 
 export default {
   components: {
+    AttributeList,
+    Attribute,
     Dot,
     Loading,
     Progress

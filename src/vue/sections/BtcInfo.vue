@@ -1,12 +1,35 @@
 <template>
   <section>
-    <h2>Bitcoin</h2>
+    <h2>Bitcoin <small v-if="blockchainInfo">{{ blockchainInfo.chain }}net</small></h2>
 
-    <div v-if="blockchainInfo">
+    <template v-if="blockchainInfo">
       <AttributeList>
         <Attribute
-          label="Chain"
-          :value="blockchainInfo.chain"
+          label="Sync Status"
+        >
+          <p
+            v-if="isSynced"
+            class="sync"
+          >
+            <Dot status="synced" />
+            Fully synced
+          </p>
+          <p
+            v-else
+            class="sync"
+          >
+            <Dot status="syncing" />
+            {{ blockchainInfo.initialblockdownload ? "Initial sync" : "Sync" }}
+            in progress
+            <Progress
+              class="progress"
+              :percent="verificationPercent"
+            />
+          </p>
+        </Attribute>
+        <Attribute
+          label="Block Height"
+          :value="blockchainInfo.blocks"
         />
         <Attribute
           label="Pruning"
@@ -16,14 +39,20 @@
             (lowest-height complete block: {{ blockchainInfo.pruneheight }})
           </span>
         </Attribute>
-        <Attribute
-          v-for="(status, softfork) in bip9Softforks"
-          :key="softfork"
-          :label="softfork"
-          :value="status"
-        />
       </AttributeList>
-    </div>
+
+      <template v-if="bip9Softforks">
+        <h4>Softforks</h4>
+        <AttributeList>
+          <Attribute
+            v-for="(status, softfork) in bip9Softforks"
+            :key="softfork"
+            :label="softfork"
+            :value="status"
+          />
+        </AttributeList>
+      </template>
+    </template>
     <Loading v-else />
   </section>
 </template>
@@ -33,12 +62,14 @@ import { mapActions, mapGetters } from 'vuex'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Loading from '../components/Loading'
+import Dot from '../components/Dot'
 
 export default {
   components: {
     AttributeList,
     Attribute,
-    Loading
+    Loading,
+    Dot
   },
 
   computed: {

@@ -15,13 +15,19 @@
           class="sync"
         >
           <Dot status="syncing" />
-          In progress
+          Sync in progress
         </p>
       </Attribute>
       <Attribute
         label="Block Height"
         :value="info.currentBlockHeight"
       />
+      <Attribute
+        label="Latest Block"
+        :value="`${info.latestBlockRelative} ago`"
+      />
+    </AttributeList>
+    <AttributeList :cols="2">
       <Attribute label="Public Key">
         <code>{{ info.publicKey }}</code>
       </Attribute>

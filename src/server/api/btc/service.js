@@ -14,6 +14,7 @@ assert(user && pass, 'Provide the BITCOIND_RPC_USER and BITCOIND_RPC_PASSWORD en
 
 const options = { protocol, host, port, user, pass }
 const rpcClient = new RpcClient(options)
+const decorate = camelizeKeys
 
 module.exports = (fnName, ...args) =>
   new Promise((resolve, reject) => {
@@ -21,7 +22,7 @@ module.exports = (fnName, ...args) =>
       const fn = rpcClient[fnName]
       if (typeof fn === 'function') {
         const handle = (err, { result }) => {
-          err ? reject(err) : resolve(camelizeKeys(result))
+          err ? reject(err) : resolve(decorate(result))
         }
         args[0] === undefined
           ? rpcClient[fnName](handle)
