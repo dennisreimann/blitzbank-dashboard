@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import API from '../lib/api'
 import btc from './modules/btc'
+import addresses from './modules/addresses'
 import channels from './modules/channels'
 import peers from './modules/peers'
 import system from './modules/system'
@@ -9,11 +10,6 @@ import system from './modules/system'
 Vue.use(Vuex)
 
 const strict = process.env.NODE_ENV !== 'production'
-
-const getters = {
-  info: state => state.info,
-  balance: state => state.balance
-}
 
 const actions = {
   async loadBalance ({ commit }) {
@@ -31,14 +27,14 @@ const mutations = {
 export default ({ info }) =>
   new Vuex.Store({
     strict,
-    getters,
     actions,
     mutations,
     state: {
       info,
-      balance: null
+      balance: undefined
     },
     modules: {
+      addresses,
       btc,
       channels,
       peers,

@@ -15,6 +15,7 @@ ROUTES.map(([method, route, rpc, getPayload]) => {
   router[method](route, async (req, res) => {
     const payload = getPayload && getPayload(req)
     try {
+      if (process.env.NODE_ENV === 'development' && payload) console.debug(payload)
       let result
       if (typeof rpc === 'object') {
         const calls = await Promise.all(rpc.map(c => bitcoind(c, payload)))
@@ -22,9 +23,9 @@ ROUTES.map(([method, route, rpc, getPayload]) => {
       } else {
         result = await bitcoind(rpc, payload)
       }
+      if (process.env.NODE_ENV === 'development') console.log(result)
       res.json(result)
     } catch (err) {
-      console.error('Error:', err)
       res.status(500).send(err.message)
     }
   })

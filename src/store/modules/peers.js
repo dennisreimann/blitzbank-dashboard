@@ -1,40 +1,40 @@
 import API from '../../lib/api'
+import Vue from 'vue'
 
 const state = {
-  all: []
-}
-
-const getters = {
-  all: state => state.all
+  peers: undefined
 }
 
 const actions = {
-  async all ({ commit }) {
-    const { data: { peers } } = await API.get('lnd/peers')
-    commit('setPeers', peers || [])
+  async loadPeers ({ commit }) {
+    const { data } = await API.get('lnd/peers')
+    commit('setPeers', data)
   },
 
-  async connect ({ dispatch }, addr) {
+  async connectPeer ({ dispatch }, { addr }) {
     await API.post('lnd/peers', { addr })
-    dispatch('all')
+    dispatch('loadPeers')
   },
 
-  async remove ({ dispatch }, pubKey) {
-    await API.del(`lnd/peers/${pubKey}`)
-    dispatch('all')
+  async disconnectPeer ({ dispatch }, { pubkey }) {
+    await API.del(`lnd/peers/${pubkey}`)
+    dispatch('loadPeers')
   }
 }
 
 const mutations = {
-  setPeers (state, peers) {
-    state.all = peers
+  setPeers (state, peers = []) {
+    state.peers = peers
+  },
+
+  addMessageToPeer (state, { peer, message }) {
+    Vue.set(peer, 'message', message)
   }
 }
 
 export default {
   namespaced: true,
   state,
-  getters,
   actions,
   mutations
 }

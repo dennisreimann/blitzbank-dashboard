@@ -7,12 +7,25 @@
       class="item home"
       exact
     />
-    <!-- <NavItem
+    <NavItem
       to="/peers"
       icon="🦸‍♂️"
       title="Peers"
       class="item peers"
-    /> -->
+    />
+    <NavItem
+      to="/channels"
+      icon="🧬"
+      title="Channels"
+      class="item channels"
+    />
+    <NavItem
+      to="/tools"
+      icon="🧰"
+      title="Tools"
+      class="item tools"
+      exact
+    />
     <NavItem
       to="/system"
       icon="⚙️"
@@ -51,7 +64,7 @@ nav {
   margin: var(--space-s) 0;
 }
 
-.system {
+.tools {
   margin-top: auto;
 }
 </style>

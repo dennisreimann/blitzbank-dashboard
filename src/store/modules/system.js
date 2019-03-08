@@ -1,15 +1,15 @@
 import API from '../../lib/api'
 
 const state = {
-  os: null,
-  info: null,
-  memory: null,
-  disk: null,
-  network: null
+  os: undefined,
+  info: undefined,
+  memory: undefined,
+  disk: undefined,
+  network: undefined
 }
 
 const actions = {
-  async info ({ commit }) {
+  async loadSystemInfo ({ commit }) {
     const { data } = await API.get('sys')
     commit('setSystemInfo', data)
   }

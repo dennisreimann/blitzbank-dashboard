@@ -1,30 +1,32 @@
 import API from '../../lib/api'
 
 const state = {
-  newAddress: null
-}
-
-const getters = {
-  newAddress: state => state.newAddress
+  activeChannels: undefined,
+  pendingChannels: undefined
 }
 
 const actions = {
-  async createAddress ({ commit }) {
-    const { data: { address } } = await API.post('lnd/addresses')
-    commit('setNewAddress', address)
+  async loadChannels ({ commit }) {
+    const { data } = await API.get('lnd/channels')
+    commit('setChannels', data)
+  },
+
+  async openChannel ({ dispatch }, payload) {
+    await API.post('lnd/channels', payload)
+    dispatch('loadChannels')
   }
 }
 
 const mutations = {
-  setNewAddress (state, address) {
-    state.newAddress = address
+  setChannels (state, { channels = [], pendingChannels = [] }) {
+    state.activeChannels = channels
+    state.pendingChannels = pendingChannels
   }
 }
 
 export default {
   namespaced: true,
   state,
-  getters,
   actions,
   mutations
 }

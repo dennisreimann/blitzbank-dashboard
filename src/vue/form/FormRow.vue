@@ -81,6 +81,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="number"],
 input[type="password"],
 select,
 textarea {
@@ -92,6 +93,7 @@ textarea {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="number"]:focus,
 input[type="password"]:focus,
 select:focus,
 textarea:focus {
@@ -108,6 +110,7 @@ textarea:focus {
 
 .invalid input[type="text"],
 .invalid input[type="email"],
+.invalid input[type="number"],
 .invalid input[type="password"],
 .invalid select,
 .invalid textarea {

@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Loading from '../components/Loading'
@@ -125,15 +125,7 @@ export default {
     Progress
   },
 
-  computed: mapState('system', ['os', 'info', 'memory', 'disk', 'network']),
-
-  async mounted () {
-    this.loadInfo()
-  },
-
-  methods: mapActions('system', {
-    loadInfo: 'info'
-  })
+  computed: mapState('system', ['os', 'info', 'memory', 'disk', 'network'])
 }
 </script>
 

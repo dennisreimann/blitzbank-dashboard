@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import Nav from './components/Nav'
 
 export default {
@@ -14,7 +14,7 @@ export default {
     Nav
   },
 
-  computed: mapGetters(['info'])
+  computed: mapState(['info'])
 }
 </script>
 
@@ -131,9 +131,17 @@ table + h2,
 table + h3,
 table + h4,
 figure + h2,
+figure + h2,
 figure + h3,
-figure + h4 {
-  margin-top: var(--space-xl);
+figure + h4,
+article + h2,
+article + h2,
+article + h3,
+article + h4,
+h2 + article,
+h3 + article ,
+h4 + article {
+  margin-top: var(--space-l);
 }
 
 main {
@@ -151,14 +159,18 @@ main a {
   text-decoration: underline;
 }
 
-section {
+main > section {
   background: var(--color-neutral-0);
   padding: var(--space-grid-gap) var(--space-grid-gap);
   border-radius: var(--space-s);
 }
 
-section + section {
+main > section + section {
   margin-top: var(--space-grid-gap);
+}
+
+section + section {
+  margin-top: var(--space-xxl);
 }
 
 article + article {
@@ -177,13 +189,13 @@ ul {
 
 ol,
 ul {
-  margin-left: var(--space-l);
+  margin-left: 1rem;
 }
 
 small {
   color: var(--color-neutral-40);
   font-size: var(--font-size-s);
-  font-weight: normal;
+  font-weight: normal !important;
 }
 
 code {

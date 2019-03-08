@@ -12,8 +12,8 @@ const ROUTES = [
   // Peers
   ['get', '/peers', 'getPeers'],
   ['post', '/peers', 'addPeer', req => {
-    const [public_key, socket] = req.body.addr.split('@')
-    return { public_key, socket }
+    const [pubkey = '', socket = ''] = req.body.addr.split('@')
+    return { public_key: pubkey.trim(), socket: socket.trim() }
   }],
   ['delete', '/peers/:public_key', 'removePeer', req => req.params],
 
@@ -24,20 +24,24 @@ const ROUTES = [
   }],
 
   // Channels
-  ['get', '/channels', 'listChannels'],
+  ['get', '/channels', ['getChannels', 'getPendingChannels']],
+  ['get', '/channels/:id', 'getChannel', req => req.params],
+  ['get', '/channels/balance', 'getChannelBalance'],
   ['post', '/channels', 'openChannel', req => {
-    const [pubkey, host] = req.body.addr.split('@')
-    return { addr: { pubkey, host }, perm: true }
+    const { pubkey, amount } = req.body
+    return {
+      partner_public_key: pubkey,
+      local_tokens: parseInt(amount)
+    }
   }],
-  ['delete', '/channels/:channelPoint', 'closeChannel', req => {
-    // TODO: req.params
-  }]
+  ['delete', '/channels/:id', 'closeChannel', req => req.params]
 ]
 
 ROUTES.map(([method, route, rpc, getPayload]) => {
   router[method](route, async (req, res) => {
     const payload = getPayload && getPayload(req)
     try {
+      if (process.env.NODE_ENV === 'development' && payload) console.debug(payload)
       let result
       if (typeof rpc === 'object') {
         const calls = await Promise.all(rpc.map(c => lnd(c, payload)))
@@ -45,12 +49,10 @@ ROUTES.map(([method, route, rpc, getPayload]) => {
       } else {
         result = await lnd(rpc, payload)
       }
+      if (process.env.NODE_ENV === 'development') console.log(result)
       res.json(result)
-    } catch (err) {
-      console.error('Error:', err)
-      const [status, message, info] = err
-      const msg = info ? info.details : (message || err.message)
-      res.status(status || 500).send(msg)
+    } catch (error) {
+      res.status(error.status).send(error.details)
     }
   })
 })

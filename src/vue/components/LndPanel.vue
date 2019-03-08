@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Dot from '../components/Dot'
@@ -67,13 +67,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['info', 'balance'])
-  },
-
-  async mounted () {
-    this.loadBalance()
-  },
-
-  methods: mapActions(['loadBalance'])
+    ...mapState(['info', 'balance'])
+  }
 }
 </script>

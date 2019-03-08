@@ -21,6 +21,10 @@ dl {
   grid-gap: var(--space-grid-gap);
 }
 
+dl.cols-5 {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
 dl.cols-4 {
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 }

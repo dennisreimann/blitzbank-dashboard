@@ -4,7 +4,7 @@
   prod: Express -> ./index.js
 */
 const morgan = require('morgan')
-const bodyParser = require('body-parser')
+const { json } = require('express')
 
 module.exports = (server, devServer) => {
   // Logging
@@ -12,6 +12,6 @@ module.exports = (server, devServer) => {
   server.use(morgan(isDevelopment ? 'dev' : 'combined'))
 
   // API
-  server.use(bodyParser.json())
+  server.use(json())
   server.use('/api', require('./api'))
 }

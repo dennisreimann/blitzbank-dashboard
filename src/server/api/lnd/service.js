@@ -13,30 +13,13 @@ const {
 
 assert(cert && macaroon, 'Provide the LND_CERT_BASE64 and LND_MACAROON_BASE64 environment variables.')
 
+btcUnits.setDisplay('satoshi', { format: '{amount} sats' })
+
 const socket = `${host}:${rpcPort}`
 const options = { socket, cert, macaroon }
 const lnd = lnService.lightningDaemon(options)
 
-module.exports = (fnName, opts = {}) =>
-  new Promise((resolve, reject) => {
-    try {
-      opts.lnd = lnd
-      const fn = lnService[fnName]
-      if (typeof fn === 'function') {
-        fn(opts, (err, result) => {
-          err ? reject(err) : resolve(decorate(result, fnName))
-        })
-      } else {
-        reject(new Error(`${fnName} is not a LND service function.`))
-      }
-    } catch (err) {
-      reject(err)
-    }
-  })
-
-btcUnits.setDisplay('satoshi', { format: '{amount} sats' })
-
-function decorate (result, fnName) {
+const decorate = async (result, fnName) => {
   result = camelizeKeys(result)
 
   switch (fnName) {
@@ -45,21 +28,86 @@ function decorate (result, fnName) {
       break
 
     case 'getChainBalance':
-      const satsC = btcUnits(result.chainBalance, 'satoshi')
-      result.chainBalanceSats = satsC.format()
-      result.chainBalanceBit = satsC.to('bit').format()
-      result.chainBalanceMbtc = satsC.to('mbtc').format()
-      result.chainBalanceBtc = satsC.to('btc').format()
+      const satsChain = btcUnits(result.chainBalance, 'satoshi')
+      result.chainBalanceSats = satsChain.format()
+      result.chainBalanceBit = satsChain.to('bit').format()
+      result.chainBalanceMbtc = satsChain.to('mbtc').format()
+      result.chainBalanceBtc = satsChain.to('btc').format()
       break
 
     case 'getPendingChainBalance':
-      const satsP = btcUnits(result.pendingChainBalance, 'satoshi')
-      result.pendingChainBalanceSats = satsP.format()
-      result.pendingChainBalanceBit = satsP.to('bit').format()
-      result.pendingChainBalanceMbtc = satsP.to('mbtc').format()
-      result.pendingChainBalanceBtc = satsP.to('btc').format()
+      const satsChainPending = btcUnits(result.pendingChainBalance, 'satoshi')
+      result.pendingChainBalanceSats = satsChainPending.format()
+      result.pendingChainBalanceBit = satsChainPending.to('bit').format()
+      result.pendingChainBalanceMbtc = satsChainPending.to('mbtc').format()
+      result.pendingChainBalanceBtc = satsChainPending.to('btc').format()
       break
+
+    case 'getChannelBalance':
+      const satsChannel = btcUnits(result.channelBalance, 'satoshi')
+      result.channelBalanceSats = satsChannel.format()
+      result.channelBalanceBit = satsChannel.to('bit').format()
+      result.channelBalanceMbtc = satsChannel.to('mbtc').format()
+      result.channelBalanceBtc = satsChannel.to('btc').format()
+
+      const satsChannelPending = btcUnits(result.pendingBalance, 'satoshi')
+      result.pendingChannelBalanceSats = satsChannelPending.format()
+      result.pendingChannelBalanceBit = satsChannelPending.to('bit').format()
+      result.pendingChannelBalanceMbtc = satsChannelPending.to('mbtc').format()
+      result.pendingChannelBalanceBtc = satsChannelPending.to('btc').format()
+      break
+
+    case 'getPeers':
+      result = await Promise.all(
+        result.peers.map(async peer => {
+          const node = await rpc('getNode', { public_key: peer.publicKey })
+          return {
+            ...peer,
+            ...node
+          }
+        })
+      )
   }
 
   return result
 }
+
+const rpc = (fnName, opts = {}) => {
+  return new Promise((resolve, reject) => {
+    try {
+      opts.lnd = lnd
+      const fn = lnService[fnName]
+      if (typeof fn === 'function') {
+        fn(opts, async (error, result) => {
+          if (error) {
+            const [status, message, info] = error
+            const err = new Error(`LND RPC ${fnName} failed.`)
+
+            if (info && info.details) {
+              const { details } = info
+              err.details = details.replace(details[0], details[0].toUpperCase())
+            } else if (message) {
+              const sentence = message.split(/(?=[A-Z])/).map(s => s.toLowerCase()).join(' ')
+              err.details = sentence.replace(sentence[0], sentence[0].toUpperCase())
+            }
+
+            err.status = status
+            reject(err)
+          } else {
+            const res = await decorate(result, fnName)
+            resolve(res)
+          }
+        })
+      } else {
+        const err = new Error(`${fnName} is not a LND service function.`)
+        err.status = 500
+        reject(err)
+      }
+    } catch (err) {
+      err.status = 500
+      reject(err)
+    }
+  })
+}
+
+module.exports = rpc

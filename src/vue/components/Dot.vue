@@ -1,6 +1,7 @@
 <template>
   <span
     :class="status"
+    :style="style"
     class="dot"
   />
 </template>
@@ -11,7 +12,18 @@ export default {
   props: {
     status: {
       type: String,
-      required: true
+      default: null
+    },
+
+    color: {
+      type: String,
+      default: null
+    }
+  },
+
+  computed: {
+    style () {
+      return this.color ? { backgroundColor: this.color } : null
     }
   }
 }
@@ -27,12 +39,20 @@ export default {
   background-color: var(--color-neutral-40);
 }
 
-.synced {
+.synced,
+.active {
   background-color: var(--color-success);
 }
 
-.syncing {
+.syncing,
+.opening {
   background-color: var(--color-progressing);
+  animation: syncing 2s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.closing {
+  background-color: var(--color-failure);
   animation: syncing 2s infinite;
   animation-timing-function: ease-in-out;
 }

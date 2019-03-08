@@ -37,7 +37,6 @@
     "axios": "^0.18.0",
     "bitcoin-units": "^0.3.0",
     "bitcoind-rpc": "^0.7.2",
-    "body-parser": "^1.18.3",
     "camelize-keys": "^1.0.0",
     "connect-history-api-fallback": "1.6.0",
     "cross-env": "5.2.0",

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import LndPanel from './components/LndPanel'
 import BtcPanel from './components/BtcPanel'
 
@@ -19,7 +19,26 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['info'])
+    ...mapState(['info', 'balance']),
+    ...mapState('btc', ['blockchainInfo'])
+  },
+
+  watch: {
+    '$route': 'fetchData'
+  },
+
+  created () {
+    this.fetchData()
+  },
+
+  methods: {
+    ...mapActions(['loadBalance']),
+    ...mapActions('btc', ['loadBlockchainInfo']),
+
+    fetchData () {
+      if (this.balance === undefined) this.loadBalance()
+      if (this.blockchainInfo === undefined) this.loadBlockchainInfo()
+    }
   }
 }
 </script>

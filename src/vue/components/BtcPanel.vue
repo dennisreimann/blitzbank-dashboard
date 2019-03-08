@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Dot from '../components/Dot'
@@ -49,7 +49,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('btc', ['blockchainInfo']),
+    ...mapState('btc', ['blockchainInfo']),
 
     isSynced () {
       return this.verificationPercent >= 100
@@ -58,24 +58,11 @@ export default {
     verificationPercent () {
       return this.blockchainInfo.verificationprogress * 100
     }
-  },
-
-  async mounted () {
-    this.loadInfo()
-  },
-
-  methods: mapActions('btc', {
-    loadInfo: 'blockchainInfo'
-  })
+  }
 }
 </script>
 
 <style scoped>
-h2 small {
-  color: var(--color-neutral-40);
-  font-weight: normal;
-}
-
 .progress {
   top: var(--space-xs);
   margin: 0 var(--space-s);

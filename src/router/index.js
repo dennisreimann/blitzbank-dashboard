@@ -18,6 +18,16 @@ export default new Router({
       component: () => import(/* webpackChunkName: "peers" */ '../vue/Peers.vue')
     },
     {
+      path: '/channels',
+      name: 'channels',
+      component: () => import(/* webpackChunkName: "channels" */ '../vue/Channels.vue')
+    },
+    {
+      path: '/tools',
+      name: 'tools',
+      component: () => import(/* webpackChunkName: "tools" */ '../vue/Tools.vue')
+    },
+    {
       path: '/system',
       name: 'system',
       component: () => import(/* webpackChunkName: "system" */ '../vue/System.vue')

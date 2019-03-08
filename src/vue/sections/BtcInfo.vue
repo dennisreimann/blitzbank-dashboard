@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Loading from '../components/Loading'
@@ -73,7 +73,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('btc', ['blockchainInfo']),
+    ...mapState('btc', ['blockchainInfo']),
 
     isSynced () {
       return this.verificationPercent >= 100
@@ -90,20 +90,9 @@ export default {
         }
       }, {}) : {}
     }
-  },
-
-  async mounted () {
-    this.loadInfo()
-  },
-
-  methods: mapActions('btc', {
-    loadInfo: 'blockchainInfo'
-  })
+  }
 }
 </script>
 
 <style scoped>
-h2 small {
-  font-weight: normal;
-}
 </style>

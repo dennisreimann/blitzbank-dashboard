@@ -1,15 +1,11 @@
 import API from '../../lib/api'
 
 const state = {
-  blockchainInfo: null
-}
-
-const getters = {
-  blockchainInfo: state => state.blockchainInfo
+  blockchainInfo: undefined
 }
 
 const actions = {
-  async blockchainInfo ({ commit }) {
+  async loadBlockchainInfo ({ commit }) {
     const { data } = await API.get('btc/blockchaininfo')
     commit('setBlockchainInfo', data)
   }
@@ -24,7 +20,6 @@ const mutations = {
 export default {
   namespaced: true,
   state,
-  getters,
   actions,
   mutations
 }
