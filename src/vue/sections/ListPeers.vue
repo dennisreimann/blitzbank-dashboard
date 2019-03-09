@@ -11,17 +11,26 @@
           <Dot :color="peer.color" />
           {{ peer.alias || peer.publicKey }}
           <Button
+            title="🧬 Create channel"
+            class="createChannel"
+            @click.native="toggleChannelForm(peer)"
+          />
+          <Button
             title="🤜 Remove"
             class="removePeer"
             @click.native="removePeer(peer)"
           />
         </div>
-        <div
-          v-if="peer.message"
-          class="peerMessage"
-        >
-          {{ peer.message }}
-        </div>
+        <Info
+          v-if="peerInfo[peer.publicKey]"
+          v-bind="peerInfo[peer.publicKey]"
+          class="peerInfo"
+        />
+        <ChannelForm
+          v-if="displayChannelForm(peer)"
+          :peer="peer"
+          class="channelForm"
+        />
       </article>
     </template>
     <Loading v-else />
@@ -29,20 +38,25 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from 'vuex'
-import { field } from '../../lib/form'
+import Vue from 'vue'
+import { mapActions, mapState } from 'vuex'
 import Dot from '../components/Dot'
+import Info, { FAILURE } from '../components/Info'
 import Loading from '../components/Loading'
+import ChannelForm from '../components/ChannelForm'
 
 export default {
   components: {
     Dot,
-    Loading
+    Info,
+    Loading,
+    ChannelForm
   },
 
   data () {
     return {
-      peerAddress: field()
+      peerInfo: {},
+      channelFormKey: null
     }
   },
 
@@ -52,7 +66,16 @@ export default {
 
   methods: {
     ...mapActions('peers', ['disconnectPeer']),
-    ...mapMutations('peers', ['addMessageToPeer']),
+
+    toggleChannelForm (peer) {
+      this.channelFormKey = this.displayChannelForm(peer)
+        ? null
+        : peer.publicKey
+    },
+
+    displayChannelForm (peer) {
+      return this.channelFormKey === peer.publicKey
+    },
 
     async removePeer (peer) {
       try {
@@ -60,7 +83,10 @@ export default {
       } catch (error) {
         const { response } = error
         const message = response ? response.data : error.message
-        this.addMessageToPeer({ peer, message })
+        Vue.set(this.peerInfo, peer.publicKey, {
+          type: FAILURE,
+          message
+        })
         console.error(message)
       }
     }
@@ -69,8 +95,14 @@ export default {
 </script>
 
 <style scoped>
+.createChannel,
 .removePeer {
   margin-left: var(--space-m);
+}
+
+.peerInfo,
+.channelForm {
+  margin-top: var(--space-m);
 }
 
 .peerMessage {

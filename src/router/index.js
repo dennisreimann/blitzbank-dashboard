@@ -10,27 +10,27 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import(/* webpackChunkName: "home" */ '../vue/Home.vue')
+      component: () => import(/* webpackChunkName: "home" */ '../vue/pages/Home.vue')
     },
     {
       path: '/peers',
       name: 'peers',
-      component: () => import(/* webpackChunkName: "peers" */ '../vue/Peers.vue')
+      component: () => import(/* webpackChunkName: "peers" */ '../vue/pages/Peers.vue')
     },
     {
       path: '/channels',
       name: 'channels',
-      component: () => import(/* webpackChunkName: "channels" */ '../vue/Channels.vue')
+      component: () => import(/* webpackChunkName: "channels" */ '../vue/pages/Channels.vue')
     },
     {
       path: '/tools',
       name: 'tools',
-      component: () => import(/* webpackChunkName: "tools" */ '../vue/Tools.vue')
+      component: () => import(/* webpackChunkName: "tools" */ '../vue/pages/Tools.vue')
     },
     {
       path: '/system',
       name: 'system',
-      component: () => import(/* webpackChunkName: "system" */ '../vue/System.vue')
+      component: () => import(/* webpackChunkName: "system" */ '../vue/pages/System.vue')
     }
   ]
 })

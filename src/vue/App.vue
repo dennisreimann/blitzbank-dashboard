@@ -33,9 +33,11 @@ export default {
   --color-neutral-20: #CCCCCC;
   --color-neutral-0: #FFFFFF;
 
-  --color-success: green;
-  --color-progressing: orange;
-  --color-failure: red;
+  --color-success: rgb(0, 128, 0);
+  --color-success-background: rgb(240, 255, 240);
+  --color-progressing: rgb(255, 165, 0);
+  --color-failure: rgb(255, 0, 0);
+  --color-failure-background: rgb(255, 240, 240);
 
   --space-xxl: 4rem;
   --space-xl: 2.5rem;

@@ -1,5 +1,4 @@
 import API from '../../lib/api'
-import Vue from 'vue'
 
 const state = {
   peers: undefined
@@ -25,10 +24,6 @@ const actions = {
 const mutations = {
   setPeers (state, peers = []) {
     state.peers = peers
-  },
-
-  addMessageToPeer (state, { peer, message }) {
-    Vue.set(peer, 'message', message)
   }
 }
 

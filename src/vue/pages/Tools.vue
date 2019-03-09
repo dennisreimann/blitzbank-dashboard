@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NewAddress from './sections/NewAddress'
+import NewAddress from '../sections/NewAddress'
 
 export default {
   components: {

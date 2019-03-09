@@ -10,9 +10,9 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import BtcInfo from './sections/BtcInfo'
-import LndInfo from './sections/LndInfo'
-import SysInfo from './sections/SysInfo'
+import BtcInfo from '../sections/BtcInfo'
+import LndInfo from '../sections/LndInfo'
+import SysInfo from '../sections/SysInfo'
 
 export default {
   components: {

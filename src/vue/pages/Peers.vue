@@ -9,8 +9,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import ListPeers from './sections/ListPeers'
-import NewPeer from './sections/NewPeer'
+import ListPeers from '../sections/ListPeers'
+import NewPeer from '../sections/NewPeer'
 
 export default {
   components: {

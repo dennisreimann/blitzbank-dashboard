@@ -9,8 +9,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import ListChannels from './sections/ListChannels'
-import NewChannel from './sections/NewChannel'
+import ListChannels from '../sections/ListChannels'
+import NewChannel from '../sections/NewChannel'
 
 export default {
   components: {

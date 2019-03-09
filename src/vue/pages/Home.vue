@@ -9,8 +9,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import LndPanel from './components/LndPanel'
-import BtcPanel from './components/BtcPanel'
+import LndPanel from '../components/LndPanel'
+import BtcPanel from '../components/BtcPanel'
 
 export default {
   components: {
