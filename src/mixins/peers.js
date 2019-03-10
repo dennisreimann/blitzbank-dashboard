@@ -12,7 +12,7 @@ export default {
 
     peerForPublicKey (publicKey) {
       const { peers } = this.$store.state.peers
-      return peers.find(peer => peer.publicKey === publicKey)
+      return peers && peers.find(peer => peer.publicKey === publicKey)
     }
   }
 }

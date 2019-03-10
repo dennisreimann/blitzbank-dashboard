@@ -36,19 +36,35 @@
               />
             </Attribute>
           </AttributeList>
+          <Info
+            v-if="channelInfo[channel.id]"
+            v-bind="channelInfo[channel.id]"
+            class="channelInfo"
+          />
+          <FormButton
+            title="👋 Close"
+            class="close"
+            @click.native="close(channel)"
+          />
         </article>
       </section>
 
       <section v-if="pendingChannels.length">
         <h3>Pending</h3>
-        <ul>
-          <li
-            v-for="channel in pendingChannels"
-            :key="channel.transactionId"
-          >
+        <div
+          v-for="channel in pendingChannels"
+          :key="channel.transactionId"
+        >
+          <strong>
+            <Dot
+              :color="peerColorForPublicKey(channel.partnerPublicKey)"
+              :status="status(channel)"
+            />
             {{ peerNameForPublicKey(channel.partnerPublicKey) }}
-          </li>
-        </ul>
+            {{ status(channel) }}
+          </strong>
+          <span>- {{ channel.localBalance }} sats</span>
+        </div>
       </section>
     </template>
     <Loading v-else />
@@ -56,11 +72,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import Vue from 'vue'
+import { mapActions, mapState } from 'vuex'
 import peers from '../../mixins/peers'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Dot from '../components/Dot'
+import Info, { FAILURE } from '../components/Info'
 import Loading from '../components/Loading'
 import Progress from '../components/Progress'
 
@@ -69,14 +87,21 @@ export default {
     AttributeList,
     Attribute,
     Dot,
+    Info,
     Loading,
     Progress
   },
 
   mixins: [peers],
 
+  data () {
+    return {
+      channelInfo: {}
+    }
+  },
+
   computed: {
-    ...mapState('channels', ['activeChannels', 'pendingChannels']),
+    ...mapState('channels', ['activeChannels', 'pendingChannels', 'closedChannels']),
 
     isLoaded () {
       return this.activeChannels !== undefined
@@ -84,6 +109,8 @@ export default {
   },
 
   methods: {
+    ...mapActions('channels', ['closeChannel']),
+
     status ({ isActive, isClosing, isOpening }) {
       if (isActive) {
         return 'active'
@@ -91,6 +118,41 @@ export default {
         return 'closing'
       } else if (isOpening) {
         return 'opening'
+      }
+    },
+
+    closeType ({ isBreachClose, isCooperativeClose, isFundingCancel, isLocalForceClose, isRemoteForceClose }) {
+      if (isBreachClose) {
+        return 'breached'
+      } else if (isCooperativeClose) {
+        return 'cooperatively'
+      } else if (isFundingCancel) {
+        return 'cancelled funding'
+      } else if (isLocalForceClose) {
+        return 'forced locally'
+      } else if (isRemoteForceClose) {
+        return 'forced remotely'
+      }
+    },
+
+    async close (channel) {
+      try {
+        const peer = this.peerForPublicKey(channel.partnerPublicKey)
+        await this.closeChannel({
+          id: channel.id,
+          socket: peer.socket,
+          transactionId: channel.transactionId,
+          transactionVout: channel.transactionVout,
+          partnerPublicKey: channel.partnerPublicKey
+        })
+      } catch (error) {
+        const { response } = error
+        const message = response ? response.data : error.message
+        Vue.set(this.channelInfo, channel.id, {
+          type: FAILURE,
+          message
+        })
+        console.error(message)
       }
     }
   }

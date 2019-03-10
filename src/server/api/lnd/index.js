@@ -25,6 +25,7 @@ const ROUTES = [
 
   // Channels
   ['get', '/channels', ['getChannels', 'getPendingChannels']],
+  ['get', '/channels/closed', ['getClosedChannels']],
   ['get', '/channels/:id', 'getChannel', req => req.params],
   ['get', '/channels/balance', 'getChannelBalance'],
   ['post', '/channels', 'openChannel', req => {
@@ -36,7 +37,17 @@ const ROUTES = [
       is_private: isPrivate
     }
   }],
-  ['delete', '/channels/:id', 'closeChannel', req => req.params]
+  ['delete', '/channels/:id', 'closeChannel', req => {
+    const { id } = req.params
+    const { socket, partnerPublicKey, transactionId, transactionVout } = req.body
+    return {
+      id,
+      socket,
+      public_key: partnerPublicKey,
+      transaction_id: transactionId,
+      transaction_vout: transactionVout
+    }
+  }]
 ]
 
 ROUTES.map(([method, route, rpc, getPayload]) => {
