@@ -1,6 +1,6 @@
 <template>
   <div
-    class="row"
+    class="field"
     :class="{
       valid: (typeof isValid === 'boolean' && isValid),
       invalid: (typeof isValid === 'boolean' && !isValid)
@@ -55,13 +55,9 @@ export default {
 </script>
 
 <style scoped>
-.row + .row {
-  margin-top: var(--space-l);
-}
-
 label {
   display: block;
-  margin-bottom: var(--space-s);
+  padding-bottom: var(--space-s);
   color: var(--color-neutral-60);
 }
 
@@ -78,23 +74,61 @@ label {
   display: block;
   margin-top: var(--space-s);
 }
+</style>
 
+<style>
 input[type="text"],
 input[type="email"],
 input[type="number"],
 input[type="password"],
+input[type="radio"],
+input[type="checkbox"],
 select,
 textarea {
   font-size: var(--font-size-m);
-  border: 2px solid #ccc;
+  border: 2px solid var(--color-neutral-20);
   padding: .75rem;
-  flex: 1;
+  height: var(--input-size);
+  transition: border-color var(--animation-duration-fast);
+}
+
+input[type="number"] {
+  text-align: right;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  appearance: none;
+  width: var(--input-size);
+}
+
+input[type="radio"] {
+  border-radius: 50%;
+}
+
+select {
+  appearance: none;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="number"]:hover,
+input[type="password"]:hover,
+input[type="radio"]:hover,
+input[type="checkbox"]:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--color-neutral-40);
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="number"]:focus,
 input[type="password"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus,
+input[type="radio"]:active,
+input[type="checkbox"]:active,
 select:focus,
 textarea:focus {
   border-color: var(--color-vibe-90);
@@ -112,9 +146,10 @@ textarea:focus {
 .invalid input[type="email"],
 .invalid input[type="number"],
 .invalid input[type="password"],
+.invalid input[type="radio"],
+.invalid input[type="checkbox"],
 .invalid select,
 .invalid textarea {
   border-color: var(--color-failure);
 }
-
 </style>

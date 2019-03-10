@@ -1,26 +1,31 @@
 <template>
   <section>
     <h3>Add new peer</h3>
-    <form @submit.prevent="addPeer">
-      <FormRow
-        id="peerAddress"
-        label="Peer address for new connection"
-        :is-valid="peerAddress.isValid"
-        :message="peerAddress.message"
-      >
-        <input
+    <form
+      novalidate
+      @submit.prevent="addPeer"
+    >
+      <FormGrid class="layout">
+        <FormField
           id="peerAddress"
-          ref="peerAddressInput"
-          v-model="peerAddress.value"
-          placeholder="pubkey@host"
-          pattern=".*@.*"
-          type="text"
+          label="Peer address for new connection"
+          :is-valid="peerAddress.isValid"
+          :message="peerAddress.message"
         >
-        <Button
+          <input
+            id="peerAddress"
+            ref="peerAddressInput"
+            v-model="peerAddress.value"
+            placeholder="pubkey@host"
+            pattern=".*@.*"
+            type="text"
+          >
+        </FormField>
+        <FormButton
           type="submit"
           title="🤝 Connect"
         />
-      </FormRow>
+      </FormGrid>
     </form>
   </section>
 </template>
@@ -57,6 +62,14 @@ export default {
 </script>
 
 <style scoped>
+.layout {
+  grid-template-columns: repeat(2, max-content);
+}
+
+#peerAddress {
+  width: 70ch;
+}
+
 .removePeer {
   margin-left: var(--space-m);
 }

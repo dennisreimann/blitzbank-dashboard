@@ -34,7 +34,7 @@ export default {
 .box {
   color: var(--color-vibe-60);
   border: 1px solid var(--color-vibe-30);
-  border-radius: var(--space-s);
+  border-radius: var(--space-xs);
   background-color: var(--color-vibe-10);
   padding: var(--space-m);
   margin-bottom: var(--space-l);

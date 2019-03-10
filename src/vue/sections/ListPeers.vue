@@ -10,12 +10,12 @@
         <div class="peerInfo">
           <Dot :color="peer.color" />
           {{ peer.alias || peer.publicKey }}
-          <Button
+          <FormButton
             title="🧬 Create channel"
             class="createChannel"
             @click.native="toggleChannelForm(peer)"
           />
-          <Button
+          <FormButton
             title="🤜 Remove"
             class="removePeer"
             @click.native="removePeer(peer)"

@@ -1,52 +1,92 @@
 <template>
+  <Loading v-if="!peers" />
   <form
-    v-if="peers.length"
+    v-else-if="peers.length"
+    novalidate
     @submit.prevent="createChannel"
   >
     <Info
       v-if="info"
       v-bind="info"
     />
-    <FormRow
-      v-if="!peer"
-      id="peerPubKey"
-      label="Peer for new channel"
-      :is-valid="peerPubKey.isValid"
-      :message="peerPubKey.message"
-    >
-      <select
+
+    <FormGrid class="layout">
+      <FormField
+        v-if="!peer"
         id="peerPubKey"
-        ref="peerPubKeyInput"
-        v-model="peerPubKey.value"
-        type="text"
+        label="Peer for new channel"
+        :is-valid="peerPubKey.isValid"
+        :message="peerPubKey.message"
       >
-        <option
-          v-for="p in peers"
-          :key="p.publicKey"
-          :value="p.publicKey"
+        <select
+          id="peerPubKey"
+          ref="peerPubKeyInput"
+          v-model="peerPubKey.value"
+          type="text"
         >
-          {{ p.alias || p.publicKey }}
-        </option>
-      </select>
-    </FormRow>
-    <FormRow
-      id="fundingAmount"
-      label="Funding amount in sats"
-      :is-valid="fundingAmount.isValid"
-      :message="fundingAmount.message"
-    >
-      <input
-        id="fundingAmount"
-        ref="fundingAmountInput"
-        v-model="fundingAmount.value"
-        type="number"
+          <option
+            disabled
+            value=""
+          >
+            Select peer
+          </option>
+          <option
+            v-for="p in peers"
+            :key="p.publicKey"
+            :value="p.publicKey"
+          >
+            {{ p.alias || p.publicKey }}
+          </option>
+        </select>
+      </FormField>
+      <FormField
+        id="isPrivate"
+        label="Private"
+        :is-valid="isPrivate.isValid"
+        :message="isPrivate.message"
       >
-      <Button
+        <FormSwitch
+          id="isPrivate"
+          ref="isPrivateInput"
+          v-model="isPrivate.value"
+          type="checkbox"
+          icon="🔒"
+        />
+      </FormField>
+      <FormField
+        id="fundingSats"
+        label="Funding amount in sats"
+        :is-valid="fundingSats.isValid"
+        :message="fundingSats.message"
+      >
+        <input
+          id="fundingSats"
+          ref="fundingAmountInput"
+          v-model="fundingSats.value"
+          type="number"
+          :step="10000"
+        >
+      </FormField>
+      <FormField
+        id="pushingSats"
+        label="Initially push sats"
+        :is-valid="pushingSats.isValid"
+        :message="pushingSats.message"
+      >
+        <input
+          id="pushingSats"
+          ref="pushingAmountInput"
+          v-model="pushingSats.value"
+          type="number"
+          :step="10000"
+        >
+      </FormField>
+      <FormButton
         type="submit"
         class="createChannel"
         title="⚡️ Create channel"
       />
-    </FormRow>
+    </FormGrid>
   </form>
   <p v-else>
     To create a channel you need to
@@ -58,12 +98,14 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import { field, reset } from '../../lib/form'
+import { field } from '../../lib/form'
 import Info, { FAILURE, SUCCESS } from './Info'
+import Loading from './Loading'
 
 export default {
   components: {
-    Info
+    Info,
+    Loading
   },
 
   props: {
@@ -76,7 +118,9 @@ export default {
   data () {
     return {
       peerPubKey: field(this.peer ? this.peer.publicKey : null),
-      fundingAmount: field(25000),
+      fundingSats: field(250000),
+      pushingSats: field(0),
+      isPrivate: field(false),
       info: null
     }
   },
@@ -90,11 +134,11 @@ export default {
 
     async createChannel () {
       try {
-        reset(this.peerPubKey, this.fundingAmount)
-
         await this.openChannel({
           pubkey: this.peerPubKey.value,
-          amount: this.fundingAmount.value
+          isPrivate: this.isPrivate.value,
+          funding: this.fundingSats.value,
+          pushing: this.pushingSats.value
         })
 
         this.info = {
@@ -114,4 +158,16 @@ export default {
 </script>
 
 <style scoped>
+.layout {
+  grid-template-columns: repeat(5, max-content);
+}
+
+#peerPubKey {
+  min-width: 18ch;
+}
+
+#fundingSats,
+#pushingSats {
+  width: 18ch;
+}
 </style>

@@ -13,7 +13,7 @@
 
 <style scoped>
 .loading {
-  --animation-duration: .6s;
+  --animation-duration: var(--animation-duration-slow);
   --height: calc(var(--dot-size) * 1.5);
   display: inline-block;
   position: relative;

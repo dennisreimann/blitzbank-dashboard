@@ -28,10 +28,12 @@ const ROUTES = [
   ['get', '/channels/:id', 'getChannel', req => req.params],
   ['get', '/channels/balance', 'getChannelBalance'],
   ['post', '/channels', 'openChannel', req => {
-    const { pubkey, amount } = req.body
+    const { pubkey, funding, pushing, isPrivate } = req.body
     return {
       partner_public_key: pubkey,
-      local_tokens: parseInt(amount)
+      local_tokens: parseInt(funding),
+      give_tokens: parseInt(pushing),
+      is_private: isPrivate
     }
   }],
   ['delete', '/channels/:id', 'closeChannel', req => req.params]

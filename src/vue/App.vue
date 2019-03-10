@@ -31,6 +31,7 @@ export default {
   --color-neutral-60: #666666;
   --color-neutral-40: #999999;
   --color-neutral-20: #CCCCCC;
+  --color-neutral-10: #fdfdfd;
   --color-neutral-0: #FFFFFF;
 
   --color-success: rgb(0, 128, 0);
@@ -50,6 +51,10 @@ export default {
   --line-height-base: 1.6;
   --line-height-heading: 1.2;
 
+  --animation-duration-fast: .2s;
+  --animation-duration-medium: .4s;
+  --animation-duration-slow: .6s;
+
   --font-size-base: 16px;
   --font-size-xxl: 2.5rem;
   --font-size-xl: 2rem;
@@ -63,6 +68,7 @@ export default {
 
   --nav-size: 60px;
   --dot-size: var(--space-m);
+  --input-size: 3rem;
 }
 
 * {

@@ -11,7 +11,7 @@ const mount = '#app'
 
 // Automatic Global Registration of Base Components
 // https://vuejs.org/v2/guide/components-registration.html#Automatic-Global-Registration-of-Base-Components
-const requireComponent = require.context('./vue/form', false, /\w+\.vue$/)
+const requireComponent = require.context('./vue/components', false, /Form[A-Z]\w+\.(vue|js)$/)
 
 requireComponent.keys().forEach(fileName => {
   const componentConfig = requireComponent(fileName)

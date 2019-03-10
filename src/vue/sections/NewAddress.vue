@@ -1,8 +1,8 @@
 <template>
   <section>
     <h3>New address</h3>
-    <form>
-      <Button
+    <form novalidate>
+      <FormButton
         title="✨ Create address"
         class="createAddress"
         @click.native="createAddress"
