@@ -9,6 +9,7 @@ const basicAuth = require('express-basic-auth')
 const history = require('connect-history-api-fallback')
 const express = require('express')
 const configureAPI = require('./configure')
+const compression = require('compression')
 const server = express()
 
 const {
@@ -27,6 +28,9 @@ server.use(basicAuth({
 }))
 
 server.disable('x-powered-by')
+
+// Preformance
+server.use(compression)
 
 // API
 configureAPI(server)

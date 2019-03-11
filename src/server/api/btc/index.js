@@ -23,7 +23,7 @@ ROUTES.map(([method, route, rpc, getPayload]) => {
       } else {
         result = await bitcoind(rpc, payload)
       }
-      if (process.env.NODE_ENV === 'development') console.log(result)
+      if (process.env.NODE_ENV === 'development') console.debug(result)
       res.json(result)
     } catch (err) {
       res.status(500).send(err.message)

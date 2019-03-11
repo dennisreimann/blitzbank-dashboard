@@ -62,7 +62,7 @@ ROUTES.map(([method, route, rpc, getPayload]) => {
       } else {
         result = await lnd(rpc, payload)
       }
-      if (process.env.NODE_ENV === 'development') console.log(result)
+      if (process.env.NODE_ENV === 'development') console.debug(result)
       res.json(result)
     } catch (error) {
       res.status(error.status).send(error.details)
