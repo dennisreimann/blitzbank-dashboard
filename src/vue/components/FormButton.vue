@@ -30,6 +30,11 @@ button {
   transition: all .2s;
 }
 
+button[disabled] {
+  pointer-events: none;
+  opacity: .4;
+}
+
 .button {
   background: transparent;
   border-radius: var(--space-l);

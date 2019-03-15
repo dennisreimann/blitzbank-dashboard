@@ -19,7 +19,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['info', 'balance']),
+    ...mapState('lnd', ['info', 'balance']),
     ...mapState('btc', ['blockchainInfo'])
   },
 
@@ -32,7 +32,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['loadBalance']),
+    ...mapActions('lnd', ['loadBalance']),
     ...mapActions('btc', ['loadBlockchainInfo']),
 
     fetchData () {

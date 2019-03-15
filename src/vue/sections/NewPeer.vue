@@ -24,6 +24,7 @@
         <FormButton
           type="submit"
           title="🤝 Connect"
+          :disabled="buttonDisabled"
         />
       </FormGrid>
     </form>
@@ -38,6 +39,12 @@ export default {
   data () {
     return {
       peerAddress: field()
+    }
+  },
+
+  computed: {
+    buttonDisabled () {
+      return this.peerAddress.value.length === 0
     }
   },
 

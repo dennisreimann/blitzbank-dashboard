@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import API from '../lib/api'
+import merge from 'deepmerge'
 import btc from './modules/btc'
+import lnd from './modules/lnd'
 import addresses from './modules/addresses'
 import channels from './modules/channels'
 import peers from './modules/peers'
@@ -11,33 +12,15 @@ Vue.use(Vuex)
 
 const strict = process.env.NODE_ENV !== 'production'
 
-const actions = {
-  async loadBalance ({ commit }) {
-    const { data: balance } = await API.get('lnd/balance')
-    commit('setBalance', balance)
-  }
-}
-
-const mutations = {
-  setBalance (state, balance) {
-    state.balance = balance
-  }
-}
-
-export default ({ info }) =>
+export default initial =>
   new Vuex.Store({
     strict,
-    actions,
-    mutations,
-    state: {
-      info,
-      balance: undefined
-    },
-    modules: {
+    modules: merge({
       addresses,
       btc,
       channels,
+      lnd,
       peers,
       system
-    }
+    }, initial)
   })

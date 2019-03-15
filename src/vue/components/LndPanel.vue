@@ -67,7 +67,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['info', 'balance'])
+    ...mapState('lnd', ['info', 'balance'])
   }
 }
 </script>

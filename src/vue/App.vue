@@ -14,7 +14,7 @@ export default {
     Nav
   },
 
-  computed: mapState(['info'])
+  computed: mapState('lnd', ['info'])
 }
 </script>
 

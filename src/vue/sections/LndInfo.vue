@@ -53,7 +53,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['info'])
+    ...mapState('lnd', ['info'])
   }
 }
 </script>

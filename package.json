@@ -30,7 +30,7 @@
     "build": "vue-cli-service build",
     "release": "yarn lint && yarn test && yarn build && yarn publish",
     "lint": "vue-cli-service lint",
-    "test": "vue-cli-service test:unit",
+    "test": "jest --clearCache && vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {

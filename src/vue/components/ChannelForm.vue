@@ -85,6 +85,7 @@
         type="submit"
         class="createChannel"
         title="⚡️ Create channel"
+        :disabled="buttonDisabled"
       />
     </FormGrid>
   </form>
@@ -117,16 +118,21 @@ export default {
 
   data () {
     return {
-      peerPubKey: field(this.peer ? this.peer.publicKey : null),
+      peerPubKey: field(this.peer ? this.peer.publicKey : ''),
       fundingSats: field(250000),
       pushingSats: field(0),
-      isPrivate: field(false),
+      isPrivate: field(true),
       info: null
     }
   },
 
   computed: {
-    ...mapState('peers', ['peers'])
+    ...mapState('peers', ['peers']),
+
+    buttonDisabled () {
+      return this.peerPubKey.value.length === 0 ||
+        this.fundingSats.value < 20000
+    }
   },
 
   methods: {

@@ -1,11 +1,11 @@
 // https://docs.cypress.io/api/introduction/api.html
-describe('Home', () => {
+describe('System', () => {
   beforeEach(() => {
-    cy.visit('/')
+    cy.visit('/system')
   })
 
-  it('shows a dashboard with the basic node information', () => {
-    cy.contains('h1', 'alice')
+  it('shows the page', () => {
+    cy.contains('h1', 'Node Information')
     cy.contains('h2', 'LND')
     cy.contains('h2', 'Bitcoin')
   })
