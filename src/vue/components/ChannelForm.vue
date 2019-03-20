@@ -1,5 +1,5 @@
 <template>
-  <Loading v-if="!peers" />
+  <Loading v-if="peers === undefined" />
   <form
     v-else-if="peers.length"
     novalidate

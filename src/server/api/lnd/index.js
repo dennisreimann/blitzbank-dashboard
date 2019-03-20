@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
 const { Router } = require('express')
-const lnd = require('./service')
+const service = require('./service')
+const { NODE_ENV } = require('../../../env')
+
 const router = Router()
 
 // Reference: https://github.com/alexbosworth/ln-service
@@ -54,15 +56,15 @@ ROUTES.map(([method, route, rpc, getPayload]) => {
   router[method](route, async (req, res) => {
     const payload = getPayload && getPayload(req)
     try {
-      if (process.env.NODE_ENV === 'development' && payload) console.debug(payload)
+      if (NODE_ENV === 'development' && payload) console.debug(payload)
       let result
       if (typeof rpc === 'object') {
-        const calls = await Promise.all(rpc.map(c => lnd(c, payload)))
+        const calls = await Promise.all(rpc.map(c => service(c, payload)))
         result = calls.reduce((res, callRes) => Object.assign(res, callRes), {})
       } else {
-        result = await lnd(rpc, payload)
+        result = await service(rpc, payload)
       }
-      if (process.env.NODE_ENV === 'development') console.debug(result)
+      if (NODE_ENV === 'development') console.debug(result)
       res.json(result)
     } catch (error) {
       res.status(error.status).send(error.details)

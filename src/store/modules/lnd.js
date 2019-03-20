@@ -1,4 +1,5 @@
 import API from '../../lib/api'
+import debounce from '../../lib/debounce'
 
 const state = {
   info: undefined,
@@ -26,6 +27,10 @@ const mutations = {
     state.balance = balance
   }
 }
+
+export const refreshBalance = store => debounce('REFRESH_BALANCE', () => {
+  store.dispatch('lnd/loadBalance')
+})
 
 export default {
   namespaced: true,

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueSocket from 'vue-native-websocket'
 import router from './router'
 import createStore from './store'
 import App from './vue/App'
@@ -25,9 +26,14 @@ requireComponent.keys().forEach(fileName => {
   try {
     const { data: info } = await API.get('lnd/info')
     const initialState = { lnd: { state: { info } } }
+    const store = createStore(initialState)
+    const wsSocketUrl = `ws://localhost:${process.env.VUE_APP_SOCKET_PORT}`
+
+    Vue.use(VueSocket, wsSocketUrl, { store: store, format: 'json' })
+
     new Vue({
       router,
-      store: createStore(initialState),
+      store,
       render: h => h(App)
     }).$mount(mount)
   } catch (error) {

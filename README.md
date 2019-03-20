@@ -39,6 +39,11 @@ You also need to define the credentials for the dashboard and API requests:
 - `AUTH_USERNAME`
 - `AUTH_PASSWORD`
 
+There are also the following environment variables:
+
+- `SERVER_PORT` - default: `4000`
+- `SOCKET_PORT` - default: `4001`
+
 You can store these in a `.env` file in the root directory of the project.
 
 ### 🛠 Development Setup

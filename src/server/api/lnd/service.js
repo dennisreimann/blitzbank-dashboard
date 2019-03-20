@@ -1,23 +1,9 @@
-const assert = require('assert')
-const lnService = require('ln-service')
 const btcUnits = require('bitcoin-units')
 const camelizeKeys = require('camelize-keys')
 const { distanceInWordsToNow, parse: parseDate } = require('date-fns')
-
-const {
-  LND_RPC_HOST: host = 'localhost',
-  LND_RPC_PORT: rpcPort = 10009,
-  LND_CERT_BASE64: cert,
-  LND_MACAROON_BASE64: macaroon
-} = process.env
-
-assert(cert && macaroon, 'Provide the LND_CERT_BASE64 and LND_MACAROON_BASE64 environment variables.')
+const { lnd, lnService } = require('../../services/lnd')
 
 btcUnits.setDisplay('satoshi', { format: '{amount} sats' })
-
-const socket = `${host}:${rpcPort}`
-const options = { socket, cert, macaroon }
-const lnd = lnService.lightningDaemon(options)
 
 const decorate = async (result, fnName) => {
   result = camelizeKeys(result)
@@ -60,7 +46,13 @@ const decorate = async (result, fnName) => {
     case 'getPeers':
       result = await Promise.all(
         result.peers.map(async peer => {
-          const node = await rpc('getNode', { public_key: peer.publicKey })
+          let node = {}
+          try {
+            node = await rpc('getNode', { public_key: peer.publicKey })
+          } catch (err) {
+            console.error(err)
+          }
+
           return {
             ...peer,
             ...node
@@ -81,7 +73,7 @@ const rpc = (fnName, opts = {}) => {
         fn(opts, async (error, result) => {
           if (error) {
             const [status, message, info] = error
-            const err = new Error(`LND RPC ${fnName} failed.`)
+            const err = new Error(`LND RPC ${fnName} failed. Payload: ${JSON.stringify(opts)}`)
 
             if (info && info.details) {
               const { details } = info

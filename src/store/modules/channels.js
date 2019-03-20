@@ -1,4 +1,5 @@
 import API from '../../lib/api'
+import debounce from '../../lib/debounce'
 
 const state = {
   activeChannels: undefined,
@@ -17,15 +18,14 @@ const actions = {
     commit('setClosedChannels', data)
   },
 
-  async openChannel ({ dispatch }, payload) {
+  async openChannel (_, payload) {
     await API.post('lnd/channels', payload)
-    dispatch('loadChannels')
+    refreshChannels(this)
   },
 
-  async closeChannel ({ dispatch }, { id, ...payload }) {
+  async closeChannel (_, { id, ...payload }) {
     await API.del(`lnd/channels/${id}`, payload)
-    dispatch('loadChannels')
-    dispatch('loadClosedChannels')
+    refreshChannels(this)
   }
 }
 
@@ -39,6 +39,11 @@ const mutations = {
     state.closedChannels = channels
   }
 }
+
+export const refreshChannels = store => debounce('REFRESH_CHANNELS', () => {
+  store.dispatch('channels/loadChannels')
+  store.dispatch('channels/loadClosedChannels')
+})
 
 export default {
   namespaced: true,

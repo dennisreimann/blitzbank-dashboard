@@ -1,4 +1,5 @@
 import API from '../../lib/api'
+import debounce from '../../lib/debounce'
 
 const state = {
   peers: undefined
@@ -10,14 +11,14 @@ const actions = {
     commit('setPeers', data)
   },
 
-  async connectPeer ({ dispatch }, { addr }) {
+  async connectPeer (_, { addr }) {
     await API.post('lnd/peers', { addr })
-    dispatch('loadPeers')
+    refreshPeers(this)
   },
 
-  async disconnectPeer ({ dispatch }, { pubkey }) {
+  async disconnectPeer (_, { pubkey }) {
     await API.del(`lnd/peers/${pubkey}`)
-    dispatch('loadPeers')
+    refreshPeers(this)
   }
 }
 
@@ -26,6 +27,10 @@ const mutations = {
     state.peers = peers
   }
 }
+
+export const refreshPeers = store => debounce('REFRESH_PEERS', () => {
+  store.dispatch('peers/loadPeers')
+})
 
 export default {
   namespaced: true,
