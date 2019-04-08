@@ -49,6 +49,17 @@ const ROUTES = [
       transaction_id: transactionId,
       transaction_vout: transactionVout
     }
+  }],
+
+  // Invoices
+  ['get', '/invoices', 'getInvoices'],
+  ['post', '/invoices', 'createInvoice', req => {
+    const { description, secret, amount } = req.body
+    return {
+      description,
+      secret,
+      tokens: amount
+    }
   }]
 ]
 

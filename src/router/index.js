@@ -10,27 +10,32 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import(/* webpackChunkName: "home" */ '../vue/pages/Home.vue')
+      component: () => import(/* webpackChunkName: "home" */ '../vue/pages/Home')
     },
     {
       path: '/peers',
       name: 'peers',
-      component: () => import(/* webpackChunkName: "peers" */ '../vue/pages/Peers.vue')
+      component: () => import(/* webpackChunkName: "peers" */ '../vue/pages/Peers')
     },
     {
       path: '/channels',
       name: 'channels',
-      component: () => import(/* webpackChunkName: "channels" */ '../vue/pages/Channels.vue')
+      component: () => import(/* webpackChunkName: "channels" */ '../vue/pages/Channels')
+    },
+    {
+      path: '/invoices',
+      name: 'invoices',
+      component: () => import(/* webpackChunkName: "invoices" */ '../vue/pages/Invoices')
     },
     {
       path: '/tools',
       name: 'tools',
-      component: () => import(/* webpackChunkName: "tools" */ '../vue/pages/Tools.vue')
+      component: () => import(/* webpackChunkName: "tools" */ '../vue/pages/Tools')
     },
     {
       path: '/system',
       name: 'system',
-      component: () => import(/* webpackChunkName: "system" */ '../vue/pages/System.vue')
+      component: () => import(/* webpackChunkName: "system" */ '../vue/pages/System')
     }
   ]
 })

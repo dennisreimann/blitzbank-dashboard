@@ -11,10 +11,6 @@
             <Dot :color="peerColorForPublicKey(channel.partnerPublicKey)" />
             {{ peerNameForPublicKey(channel.partnerPublicKey) }}:
             {{ channel.id }} {{ channel.isPrivate ? "🔒" : "" }}
-            <template v-if="!channel.isActive">
-              <Dot :status="status(channel)" />
-              {{ status(channel) }}
-            </template>
           </h4>
           <AttributeList>
             <Attribute
@@ -36,18 +32,35 @@
               />
             </Attribute>
           </AttributeList>
+          <div class="options">
+            <FormButton
+              title="🧾 Create Invoice"
+              class="createInvoice"
+              @click.native="toggleInvoiceForm(channel)"
+            />
+            <FormButton
+              title="👋 Close"
+              class="closeChannel"
+              @click.native="close(channel)"
+            />
+          </div>
           <Info
             v-if="channelInfo[channel.id]"
             v-bind="channelInfo[channel.id]"
             class="channelInfo"
           />
-          <FormButton
-            title="👋 Close"
-            class="close"
-            @click.native="close(channel)"
+          <InvoiceForm
+            v-if="displayInvoiceForm(channel)"
+            :channel="channel"
+            class="invoiceForm"
           />
         </article>
       </section>
+      <div v-else>
+        No active channels, yet.
+      </div>
+
+      <hr v-if="activeChannels.length === 0 && pendingChannels.length">
 
       <section v-if="pendingChannels.length">
         <h3>Pending</h3>
@@ -81,6 +94,7 @@ import Dot from '../components/Dot'
 import Info, { FAILURE } from '../components/Info'
 import Loading from '../components/Loading'
 import Progress from '../components/Progress'
+import InvoiceForm from '../components/InvoiceForm'
 
 export default {
   components: {
@@ -89,14 +103,16 @@ export default {
     Dot,
     Info,
     Loading,
-    Progress
+    Progress,
+    InvoiceForm
   },
 
   mixins: [peers],
 
   data () {
     return {
-      channelInfo: {}
+      channelInfo: {},
+      invoiceFormKey: null
     }
   },
 
@@ -110,6 +126,16 @@ export default {
 
   methods: {
     ...mapActions('channels', ['closeChannel']),
+
+    toggleInvoiceForm (channel) {
+      this.invoiceFormKey = this.displayInvoiceForm(channel)
+        ? null
+        : channel.id
+    },
+
+    displayInvoiceForm (channel) {
+      return this.invoiceFormKey === channel.id
+    },
 
     status ({ isActive, isClosing, isOpening }) {
       if (isActive) {
@@ -158,3 +184,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.invoiceForm {
+  margin-top: var(--space-l);
+}
+</style>

@@ -5,6 +5,7 @@ import btc from './modules/btc'
 import lnd, { refreshBalance } from './modules/lnd'
 import addresses from './modules/addresses'
 import channels, { refreshChannels } from './modules/channels'
+import invoices, { refreshInvoices } from './modules/invoices'
 import peers, { refreshPeers } from './modules/peers'
 import system from './modules/system'
 
@@ -61,6 +62,10 @@ export default initial =>
           case 'closed_channel':
             refreshChannels(this)
             break
+          case 'invoice':
+          case 'channel_transaction':
+            refreshInvoices(this)
+            break
         }
       }
     },
@@ -68,6 +73,7 @@ export default initial =>
       addresses,
       btc,
       channels,
+      invoices,
       lnd,
       peers,
       system

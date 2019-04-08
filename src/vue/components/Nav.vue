@@ -20,6 +20,12 @@
       class="item channels"
     />
     <NavItem
+      to="/invoices"
+      icon="🧾"
+      title="Invoices"
+      class="item invoices"
+    />
+    <NavItem
       to="/tools"
       icon="🧰"
       title="Tools"

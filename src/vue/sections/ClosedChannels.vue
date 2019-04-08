@@ -30,6 +30,9 @@
           </AttributeList>
         </article>
       </section>
+      <div v-else>
+        No closed channels, yet.
+      </div>
     </template>
     <Loading v-else />
   </section>

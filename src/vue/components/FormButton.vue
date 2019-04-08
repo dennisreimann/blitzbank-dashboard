@@ -36,7 +36,7 @@ button[disabled] {
 }
 
 .button {
-  background: transparent;
+  background: var(--color-neutral-0);
   border-radius: var(--space-l);
   border: 1px solid var(--color-neutral-20);
   padding: var(--space-s) var(--space-m);

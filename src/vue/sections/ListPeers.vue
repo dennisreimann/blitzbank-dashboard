@@ -7,9 +7,11 @@
         :key="peer.publicKey"
         class="peer"
       >
-        <div class="peerInfo">
+        <h4 class="peerInfo">
           <Dot :color="peer.color" />
           {{ peer.alias || peer.publicKey }}
+        </h4>
+        <div class="options">
           <FormButton
             title="🧬 Create channel"
             class="createChannel"
@@ -95,14 +97,8 @@ export default {
 </script>
 
 <style scoped>
-.createChannel,
-.removePeer {
-  margin-left: var(--space-m);
-}
-
-.peerInfo,
 .channelForm {
-  margin-top: var(--space-m);
+  margin-top: var(--space-l);
 }
 
 .peerMessage {

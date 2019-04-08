@@ -22,14 +22,14 @@ dl {
 }
 
 dl.cols-5 {
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: [col-start] repeat(auto-fill, minmax(150px, 1fr)) [col-end];
 }
 
 dl.cols-4 {
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-template-columns: [col-start] repeat(auto-fill, minmax(180px, 1fr)) [col-end];
 }
 
 dl.cols-2 {
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: [col-start] repeat(auto-fill, minmax(360px, 1fr)) [col-end];
 }
 </style>

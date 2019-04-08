@@ -92,9 +92,9 @@ body {
   padding-left: var(--nav-size);
   background-color: var(--color-vibe-10);
   background-image:
-    radial-gradient(ellipse at 55% 90%, #fbfcdb, transparent),
+    radial-gradient(ellipse at 55vh 90vw, #fbfcdb, transparent),
     radial-gradient(circle at right top, var(--color-vibe-10), transparent),
-    radial-gradient(circle at 40% 60%, rgba(60, 213, 0, .3), transparent);
+    radial-gradient(circle at 40vh 60vw, rgba(60, 213, 0, .3), transparent);
 }
 
 h1 {
@@ -147,8 +147,11 @@ article + h2,
 article + h3,
 article + h4,
 h2 + article,
-h3 + article ,
-h4 + article {
+h3 + article,
+h4 + article,
+h2 + dl,
+h3 + dl,
+h4 + dl {
   margin-top: var(--space-l);
 }
 
@@ -182,7 +185,16 @@ section + section {
 }
 
 article + article {
+  border-top: 1px dashed var(--color-neutral-20);
   margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+}
+
+hr {
+  border: 0;
+  border-top: 1px dashed var(--color-neutral-20);
+  margin-bottom: var(--space-l);
+  margin-top: var(--space-l);
 }
 
 p {
@@ -220,6 +232,11 @@ code {
   padding: 0 !important;
   position: absolute !important;
   width: 1px !important;
+}
+
+.options button {
+  margin-right: var(--space-m);
+  margin-top: var(--space-m);
 }
 </style>
 

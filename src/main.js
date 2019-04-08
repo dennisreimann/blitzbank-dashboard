@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueSocket from 'vue-native-websocket'
+import Clipboard from 'clipboard'
 import router from './router'
 import createStore from './store'
 import App from './vue/App'
@@ -36,6 +37,11 @@ requireComponent.keys().forEach(fileName => {
       store,
       render: h => h(App)
     }).$mount(mount)
+
+    new Clipboard('[data-clipboard-text]')
+      .on('error', event => {
+        console.error('Clipboard error:', event)
+      })
   } catch (error) {
     console.error(error) // eslint-disable-line no-console
     document.querySelector(mount).innerHTML = `Could not initialize app: Fetching data failed.`

@@ -2,6 +2,7 @@
   <span
     :class="status"
     :style="style"
+    :title="status"
     class="dot"
   />
 </template>
@@ -40,12 +41,14 @@ export default {
 }
 
 .synced,
-.active {
+.active,
+.confirmed {
   background-color: var(--color-success);
 }
 
 .syncing,
-.opening {
+.opening,
+.unconfirmed  {
   background-color: var(--color-progressing);
   animation: syncing 2s infinite;
   animation-timing-function: ease-in-out;
