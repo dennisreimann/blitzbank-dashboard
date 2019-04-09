@@ -54,7 +54,8 @@ export default {
   animation-timing-function: ease-in-out;
 }
 
-.closing {
+.closing,
+.expired {
   background-color: var(--color-failure);
   animation: syncing 2s infinite;
   animation-timing-function: ease-in-out;

@@ -60,6 +60,13 @@ const ROUTES = [
       secret,
       tokens: amount
     }
+  }],
+
+  // Payments
+  ['get', '/payments', 'getPayments'],
+  ['get', '/paymentrequests/:request', 'decodePaymentRequest', req => req.params],
+  ['post', '/payments', 'pay', req => {
+    return { request: (req.body.request || '').replace(/\s+/g, '') }
   }]
 ]
 

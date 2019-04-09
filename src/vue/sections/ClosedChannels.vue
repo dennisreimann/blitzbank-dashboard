@@ -20,7 +20,7 @@
               :value="channel.capacity"
             />
             <Attribute
-              label="Local"
+              label="Local sats"
               :value="channel.finalLocalBalance"
             />
             <Attribute

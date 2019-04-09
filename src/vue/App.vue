@@ -151,7 +151,8 @@ h3 + article,
 h4 + article,
 h2 + dl,
 h3 + dl,
-h4 + dl {
+h4 + dl,
+form + form {
   margin-top: var(--space-l);
 }
 

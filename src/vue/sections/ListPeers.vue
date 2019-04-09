@@ -8,8 +8,13 @@
         class="peer"
       >
         <h4 class="peerInfo">
-          <Dot :color="peer.color" />
-          {{ peer.alias || peer.publicKey }}
+          <Dot :color="peer.color" />{{ ' ' }}
+          <abbr
+            v-if="peer.alias"
+            :title="peer.publicKey"
+            :data-clipboard-text="peer.publicKey"
+          >{{ peer.alias }}</abbr>
+          <span v-else>{{ peer.publicKey }}</span>
         </h4>
         <div class="options">
           <FormButton

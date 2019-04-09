@@ -35,6 +35,10 @@ button[disabled] {
   opacity: .4;
 }
 
+.grid + button {
+  margin-top: var(--space-m);
+}
+
 .button {
   background: var(--color-neutral-0);
   border-radius: var(--space-l);

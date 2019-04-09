@@ -18,11 +18,11 @@
               :value="channel.capacity"
             />
             <Attribute
-              label="Local"
+              label="Local sats"
               :value="channel.localBalance"
             />
             <Attribute
-              label="Remote"
+              label="Remote sats"
               :value="channel.remoteBalance"
             />
             <Attribute label="Balance">
@@ -144,20 +144,6 @@ export default {
         return 'closing'
       } else if (isOpening) {
         return 'opening'
-      }
-    },
-
-    closeType ({ isBreachClose, isCooperativeClose, isFundingCancel, isLocalForceClose, isRemoteForceClose }) {
-      if (isBreachClose) {
-        return 'breached'
-      } else if (isCooperativeClose) {
-        return 'cooperatively'
-      } else if (isFundingCancel) {
-        return 'cancelled funding'
-      } else if (isLocalForceClose) {
-        return 'forced locally'
-      } else if (isRemoteForceClose) {
-        return 'forced remotely'
       }
     },
 

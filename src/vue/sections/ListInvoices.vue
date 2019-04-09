@@ -18,16 +18,22 @@
               :value="invoice.description"
             />
             <Attribute
-              label="Amount"
+              label="Amount in sats"
               :value="invoice.tokens"
             />
             <Attribute
               label="Created at"
-              :value="invoice.createdAt"
+              :value="invoice.createdDate"
             />
             <Attribute
+              v-if="invoice.isConfirmed"
+              label="Confirmed at"
+              :value="invoice.confirmedDate"
+            />
+            <Attribute
+              v-else
               label="Expires at"
-              :value="invoice.expiresAt"
+              :value="invoice.expiresDate"
             />
             <Attribute
               label="Payment Request"
@@ -70,7 +76,6 @@ export default {
 
   data () {
     return {
-      channelInfo: {},
       invoiceFormKey: null
     }
   },
@@ -102,41 +107,6 @@ export default {
       } else {
         return 'unconfirmed'
       }
-    },
-
-    closeType ({ isBreachClose, isCooperativeClose, isFundingCancel, isLocalForceClose, isRemoteForceClose }) {
-      if (isBreachClose) {
-        return 'breached'
-      } else if (isCooperativeClose) {
-        return 'cooperatively'
-      } else if (isFundingCancel) {
-        return 'cancelled funding'
-      } else if (isLocalForceClose) {
-        return 'forced locally'
-      } else if (isRemoteForceClose) {
-        return 'forced remotely'
-      }
-    },
-
-    async pay (invoice) {
-    //   try {
-    //     const peer = this.peerForPublicKey(channel.partnerPublicKey)
-    //     await this.closeChannel({
-    //       id: channel.id,
-    //       socket: peer.socket,
-    //       transactionId: channel.transactionId,
-    //       transactionVout: channel.transactionVout,
-    //       partnerPublicKey: channel.partnerPublicKey
-    //     })
-    //   } catch (error) {
-    //     const { response } = error
-    //     const message = response ? response.data : error.message
-    //     Vue.set(this.channelInfo, channel.id, {
-    //       type: FAILURE,
-    //       message
-    //     })
-    //     console.error(message)
-    //   }
     }
   }
 }

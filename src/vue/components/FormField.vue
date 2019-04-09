@@ -85,10 +85,12 @@ input[type="radio"],
 input[type="checkbox"],
 select,
 textarea {
+  font-family: var(--font-family-base);
   font-size: var(--font-size-m);
   border: 2px solid var(--color-neutral-20);
   padding: .75rem;
   height: var(--input-size);
+  line-height: var(--line-height-base);
   transition: border-color var(--animation-duration-fast);
 }
 
@@ -108,6 +110,11 @@ input[type="radio"] {
 
 select {
   appearance: none;
+}
+
+textarea {
+  width: 100%;
+  min-height: 8em;
 }
 
 input[type="text"]:hover,

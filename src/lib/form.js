@@ -4,6 +4,7 @@ export function field (value = '', isValid = null, message = null) {
 
 export function reset (...fields) {
   fields.forEach(field => {
+    field.value = null
     field.message = null
     field.isValid = null
   })

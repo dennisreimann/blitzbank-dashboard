@@ -1,9 +1,11 @@
 const btcUnits = require('bitcoin-units')
 const camelizeKeys = require('camelize-keys')
-const { distanceInWordsToNow, parse: parseDate } = require('date-fns')
+const { distanceInWordsToNow, format: formatDate, parse: parseDate } = require('date-fns')
 const { lnd, lnService } = require('../../services/lnd')
 
 btcUnits.setDisplay('satoshi', { format: '{amount} sats' })
+
+const formatAt = dateString => formatDate(parseDate(dateString), 'YYYY-MM-DD HH:MM:SS')
 
 const decorate = async (result, fnName) => {
   result = camelizeKeys(result)
@@ -43,6 +45,26 @@ const decorate = async (result, fnName) => {
       result.pendingChannelBalanceBtc = satsChannelPending.to('btc').format()
       break
 
+    case 'getInvoices':
+      result.invoices = result.invoices.map(invoice => {
+        return {
+          ...invoice,
+          createdDate: invoice.createdAt && formatAt(invoice.createdAt),
+          expiresDate: invoice.expiresAt && formatAt(invoice.expiresAt),
+          confirmedDate: invoice.confirmedAt && formatAt(invoice.confirmedAt)
+        }
+      })
+      break
+
+    case 'getPayments':
+      result.payments = result.payments.map(payment => {
+        return {
+          ...payment,
+          createdDate: payment.createdAt && formatAt(payment.createdAt)
+        }
+      })
+      break
+
     case 'getPeers':
       result = await Promise.all(
         result.peers.map(async peer => {
@@ -59,6 +81,7 @@ const decorate = async (result, fnName) => {
           }
         })
       )
+      break
   }
 
   return result

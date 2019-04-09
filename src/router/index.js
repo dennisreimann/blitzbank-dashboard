@@ -28,6 +28,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "invoices" */ '../vue/pages/Invoices')
     },
     {
+      path: '/payments',
+      name: 'payments',
+      component: () => import(/* webpackChunkName: "payments" */ '../vue/pages/Payments')
+    },
+    {
       path: '/tools',
       name: 'tools',
       component: () => import(/* webpackChunkName: "tools" */ '../vue/pages/Tools')

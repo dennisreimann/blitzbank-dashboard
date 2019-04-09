@@ -26,6 +26,12 @@
       class="item invoices"
     />
     <NavItem
+      to="/payments"
+      icon="💸"
+      title="Payments"
+      class="item payments"
+    />
+    <NavItem
       to="/tools"
       icon="🧰"
       title="Tools"
