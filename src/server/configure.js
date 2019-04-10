@@ -8,7 +8,7 @@ const { Server: WebSocketServer } = require('ws')
 const { json } = require('express')
 const { subscribeToGraph, subscribeToInvoices, subscribeToTransactions } = require('ln-service/push')
 const { lnd } = require('./services/lnd')
-const { SOCKET_PORT, NODE_ENV } = require('../env')
+const { SOCKET_PORT, NODE_ENV } = require('./env')
 
 const { log } = console
 

@@ -9,7 +9,7 @@ const basicAuth = require('express-basic-auth')
 const history = require('connect-history-api-fallback')
 const express = require('express')
 const configure = require('./configure')
-const { SERVER_PORT, AUTH_USERNAME, AUTH_PASSWORD } = require('../env')
+const { SERVER_PORT, AUTH_USERNAME, AUTH_PASSWORD } = require('./env')
 
 const app = express()
 const server = createServer(app)
@@ -18,7 +18,7 @@ const server = createServer(app)
 app.use(basicAuth({
   users: { [AUTH_USERNAME]: AUTH_PASSWORD },
   challenge: true,
-  realm: 'Full node'
+  realm: 'Full Node Dashboard'
 }))
 
 app.disable('x-powered-by')

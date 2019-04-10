@@ -36,7 +36,7 @@ Here are some example screenshots:
 
 ## 📦 Setup
 
-I will make this easier at some point, but for now … 
+I will make this easier at some point, but for now …
 SSH into your full node and execute the following commands:
 
 ```sh
@@ -45,13 +45,9 @@ mkdir dashboard
 cd dashboard
 
 # initialize an empty project and install the app
-npm init -y
-npm install @blitzbank/dashboard
+npm init @blitzbank/dashboard
 
-# create the .env file containing the necessary variables
-echo "AUTH_USERNAME=admin\nAUTH_PASSWORD=topsecret" > .env
-
-# open the file in your favorite editor and add other variables
+# edit the .env file in your favorite editor
 # (see the list of variables below)
 vim .env
 

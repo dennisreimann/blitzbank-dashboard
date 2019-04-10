@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 const { Router } = require('express')
 const bitcoind = require('./service')
-const { NODE_ENV } = require('../../../env')
+const { NODE_ENV } = require('../../env')
 
 const router = Router()
 

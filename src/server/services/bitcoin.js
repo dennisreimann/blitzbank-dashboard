@@ -6,7 +6,7 @@ const {
   BITCOIND_RPC_PROTOCOL: protocol,
   BITCOIND_RPC_HOST: host,
   BITCOIND_RPC_PORT: port
-} = require('../../env')
+} = require('../env')
 
 const options = { protocol, host, port, user, pass }
 const rpcClient = new RpcClient(options)

@@ -4,7 +4,7 @@ const {
   LND_RPC_PORT: rpcPort,
   LND_CERT_BASE64: cert,
   LND_MACAROON_BASE64: macaroon
-} = require('../../env')
+} = require('../env')
 
 const socket = `${host}:${rpcPort}`
 const options = { socket, cert, macaroon }

@@ -29,11 +29,12 @@
     "lightning-network",
     "fullnode",
     "dashboard",
-    "admin"
+    "admin",
+    "blitzbank"
   ],
   "scripts": {
-    "start": "rimraf assets dist && nodemon -r dotenv/config --exec 'vue-cli-service serve'",
-    "start:prod": "cross-env NODE_ENV=production node -r dotenv/config $npm_package_main",
+    "start": "rimraf assets dist && nodemon --exec 'vue-cli-service serve'",
+    "start:prod": "$npm_package_bin_blitzbank",
     "build": "vue-cli-service build",
     "release": "yarn lint && yarn test && yarn build && yarn publish",
     "lint": "vue-cli-service lint",

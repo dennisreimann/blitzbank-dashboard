@@ -1,5 +1,5 @@
 const configure = require('./src/server/configure')
-const { SOCKET_PORT } = require('./src/env')
+const { SOCKET_PORT } = require('./src/server/env')
 
 // https://cli.vuejs.org/guide/mode-and-env.html#modes
 process.env.VUE_APP_SOCKET_PORT = SOCKET_PORT
