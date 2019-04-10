@@ -1,12 +1,21 @@
-# ⚡️ Blitzbank Dashboard  🏦
+# ⚡️ Blitzbank Dashboard   🏦
 
-Here‘s to the #reckless! ⚡️
-A dashboard for your Bitcoind/LND full node.
+Here‘s to the ***#reckless***! ⚡️
+Dashboard for your Bitcoind/LND full node.
 
 [![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
 [![npm](https://img.shields.io/npm/v/@blitzbank/dashboard.svg)](https://www.npmjs.com/package/@blitzbank/dashboard)
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/blitzbank-dashboard/badge.svg)](https://snyk.io/test/github/dennisreimann/blitzbank-dashboard)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
+## 👉 Disclaimer
+
+This is an early stage project.
+Right now this is my personal playground for figuring out how to approach Lightning node management from an UX perspective.
+Potentially everything is subject to change.
+
+Nevertheless: As we are all figuriung stiuff out, I am putting this project out hre and invite feedback.
+Let me know in case I can help setting up the dashboard – that's how we can improve the documentation too. 😉
 
 ## 🗜 Prerequisites
 
@@ -20,9 +29,35 @@ For development you can use the
 
 ## 📦 Setup
 
-### ✨ Environment variables
+I will make this easier at some point, but for now … 
+SSH into your full node and execute the following commands:
 
-These env variables need to be set or passed to the process:
+```sh
+# create a new directory for the dashboard
+mkdir dashboard
+cd dashboard
+
+# initialize an empty project and install the app
+npm init -y
+npm install @blitzbank/dashboard
+
+# create the .env file containing the necessary variables
+echo "AUTH_USERNAME=admin\nAUTH_PASSWORD=topsecret" > .env
+
+# open the file in your favorite editor and add other variables
+# (see the list of variables below)
+vim .env
+
+# start the app
+blitzbank
+```
+
+You will most likely need to [setup a process manager](https://expressjs.com/en/advanced/best-practice-performance.html#ensure-your-app-automatically-restarts) to keep the app running.
+I will improve the deployment too – promised!
+
+## ✨ Environment variables
+
+These env variables should be set:
 
 - `BITCOIND_RPC_PROTOCOL` - default: `http`
 - `BITCOIND_RPC_HOST` - default: `127.0.0.1`
@@ -33,18 +68,14 @@ These env variables need to be set or passed to the process:
 - `LND_RPC_PORT` - default: `10009`
 - `LND_CERT_BASE64` - the base64 encoded string of the `tls.cert` file
 - `LND_MACAROON_BASE64` - the base64 encoded string of the macaroon file
+- `SERVER_PORT` - default: `4000`
+- `SOCKET_PORT` - default: `4001`
 
 You also need to define the credentials for the dashboard and API requests:
 
 - `AUTH_USERNAME`
 - `AUTH_PASSWORD`
 
-There are also the following environment variables:
-
-- `SERVER_PORT` - default: `4000`
-- `SOCKET_PORT` - default: `4001`
-
-You can store these in a `.env` file in the root directory of the project.
 
 ### 🛠 Development Setup
 
@@ -60,3 +91,10 @@ Create a build and rebuild on file change.
 ```bash
 yarn start
 ```
+
+## 🖖 Alternatives
+
+Here are some other projects with similar goals, you might want to have a look at those too:
+
+- [RTL – Ride the Lightning](https://github.com/ShahanaFarooqui/RTL)
+- [lndash](https://github.com/djmelik/lndash)

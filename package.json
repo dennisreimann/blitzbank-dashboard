@@ -1,7 +1,7 @@
 {
   "name": "@blitzbank/dashboard",
-  "description": "A dashboard for your Bitcoind/LND full node.",
-  "version": "0.1.0",
+  "description": "Dashboard for your Bitcoind/LND full node.",
+  "version": "0.0.1",
   "license": "MIT",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/blitzbank-dashboard",
@@ -11,7 +11,11 @@
     "node": ">=10.13"
   },
   "main": "src/server/index.js",
+  "bin": {
+    "blitzbank": "./bin/blitzbank.sh"
+  },
   "files": [
+    "bin",
     "dist",
     "src/server"
   ],
