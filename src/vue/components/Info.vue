@@ -40,15 +40,15 @@ export default {
   margin-bottom: var(--space-l);
 }
 
-.success {
-  color: var(--color-success);
-  border-color: var(--color-success);
-  background-color: var(--color-success-background);
-}
-
 .failure {
   color: var(--color-failure);
   border-color: var(--color-failure);
   background-color: var(--color-failure-background);
+}
+
+.success {
+  color: var(--color-success);
+  border-color: var(--color-success);
+  background-color: var(--color-success-background);
 }
 </style>

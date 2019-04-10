@@ -91,10 +91,10 @@ import peers from '../../mixins/peers'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Dot from '../components/Dot'
-import Info, { FAILURE } from '../components/Info'
 import Loading from '../components/Loading'
-import Progress from '../components/Progress'
+import Info, { FAILURE } from '../components/Info'
 import InvoiceForm from '../components/InvoiceForm'
+import Progress from '../components/Progress'
 
 export default {
   components: {
@@ -164,7 +164,6 @@ export default {
           type: FAILURE,
           message
         })
-        console.error(message)
       }
     }
   }

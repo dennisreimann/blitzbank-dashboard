@@ -74,12 +74,6 @@ export default {
     Loading
   },
 
-  data () {
-    return {
-      invoiceFormKey: null
-    }
-  },
-
   computed: {
     ...mapState('invoices', ['invoices']),
 
@@ -90,16 +84,6 @@ export default {
 
   methods: {
     ...mapActions('invoices', ['payInvoice']),
-
-    toggleInvoiceForm (channel) {
-      this.invoiceFormKey = this.displayInvoiceForm(channel)
-        ? null
-        : channel.id
-    },
-
-    displayInvoiceForm (channel) {
-      return this.invoiceFormKey === channel.id
-    },
 
     status ({ isConfirmed, isOutgoing }) {
       if (isConfirmed) {
@@ -113,10 +97,6 @@ export default {
 </script>
 
 <style scoped>
-.invoiceForm {
-  margin-top: var(--space-l);
-}
-
 .paymentRequest {
   grid-column-start: col-start;
   grid-column-end: col-end;

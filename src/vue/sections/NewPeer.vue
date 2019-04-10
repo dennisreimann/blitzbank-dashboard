@@ -61,7 +61,7 @@ export default {
         this.peerAddress.message = response.data
         this.peerAddress.isValid = false
         this.$refs.peerAddressInput.focus()
-        console.error(msg)
+        console.error(msg) // eslint-disable-line no-console
       }
     }
   }

@@ -9,13 +9,13 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import LndPanel from '../components/LndPanel'
 import BtcPanel from '../components/BtcPanel'
+import LndPanel from '../components/LndPanel'
 
 export default {
   components: {
-    LndPanel,
-    BtcPanel
+    BtcPanel,
+    LndPanel
   },
 
   computed: {

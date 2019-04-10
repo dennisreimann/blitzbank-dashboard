@@ -18,8 +18,8 @@ import InvoiceForm from '../components/InvoiceForm'
 
 export default {
   components: {
-    ListInvoices,
-    InvoiceForm
+    InvoiceForm,
+    ListInvoices
   },
 
   computed: {

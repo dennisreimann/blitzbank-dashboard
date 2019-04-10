@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Vue from 'vue'
 import VueSocket from 'vue-native-websocket'
 import Clipboard from 'clipboard'
@@ -43,7 +44,7 @@ requireComponent.keys().forEach(fileName => {
         console.error('Clipboard error:', event)
       })
   } catch (error) {
-    console.error(error) // eslint-disable-line no-console
+    console.error(error)
     document.querySelector(mount).innerHTML = `Could not initialize app: Fetching data failed.`
   }
 })()

@@ -47,10 +47,10 @@
 <script>
 import Vue from 'vue'
 import { mapActions, mapState } from 'vuex'
+import ChannelForm from '../components/ChannelForm'
 import Dot from '../components/Dot'
 import Info, { FAILURE } from '../components/Info'
 import Loading from '../components/Loading'
-import ChannelForm from '../components/ChannelForm'
 
 export default {
   components: {
@@ -94,7 +94,6 @@ export default {
           type: FAILURE,
           message
         })
-        console.error(message)
       }
     }
   }

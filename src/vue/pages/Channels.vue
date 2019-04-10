@@ -15,9 +15,9 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import ClosedChannels from '../sections/ClosedChannels'
 import ListChannels from '../sections/ListChannels'
 import ChannelForm from '../components/ChannelForm'
-import ClosedChannels from '../sections/ClosedChannels'
 
 export default {
   components: {

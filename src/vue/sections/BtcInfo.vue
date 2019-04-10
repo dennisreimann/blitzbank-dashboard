@@ -61,8 +61,8 @@
 import { mapState } from 'vuex'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
-import Loading from '../components/Loading'
 import Dot from '../components/Dot'
+import Loading from '../components/Loading'
 
 export default {
   components: {
