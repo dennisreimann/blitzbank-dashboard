@@ -100,3 +100,4 @@ Here are some other projects with similar goals, you might want to have a look a
 
 - [RTL – Ride the Lightning](https://github.com/ShahanaFarooqui/RTL)
 - [lndash](https://github.com/djmelik/lndash)
+- [ln-dashboard](https://github.com/PatrickLemke/ln-dashboard)
