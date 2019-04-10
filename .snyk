@@ -1,0 +1,13 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.4
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:dns-sync:20170909':
+    - ln-service > dns-sync:
+        reason: unfixed
+        expires: '2019-05-10T13:09:37.326Z'
+  'npm:shelljs:20140723':
+    - ln-service > dns-sync > shelljs:
+        reason: unfixed
+        expires: '2019-05-10T13:09:37.326Z'
+patch: {}
