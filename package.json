@@ -10,6 +10,9 @@
   "engines": {
     "node": ">=10.13"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "src/server/index.js",
   "bin": {
     "blitzbank": "./bin/blitzbank.sh"

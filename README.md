@@ -27,6 +27,13 @@ For development you can use the
 [bitstein-test-env](https://medium.com/@bitstein/setting-up-a-bitcoin-lightning-network-test-environment-ab967167594a) or its
 [dockerized version](https://github.com/JeffVandrewJr/bitstein-test-env).
 
+## 🖥 Screenshots
+
+Here are some example screenshots:
+
+[Home](media/home.png) | [Peers](media/peers.png) | [Channels](media/channels.png) |
+[Invoices](media/invoices.png) | [Payments](media/payments.png) | [System](media/system.png)
+
 ## 📦 Setup
 
 I will make this easier at some point, but for now … 
@@ -75,7 +82,6 @@ You also need to define the credentials for the dashboard and API requests:
 
 - `AUTH_USERNAME`
 - `AUTH_PASSWORD`
-
 
 ### 🛠 Development Setup
 
