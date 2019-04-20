@@ -14,7 +14,7 @@ This is an early stage project.
 Right now this is my personal playground for figuring out how to approach Lightning node management from an UX perspective.
 Potentially everything is subject to change.
 
-Nevertheless: As we are all figuriung stiuff out, I am putting this project out hre and invite feedback.
+Nevertheless: As we are all figuring stuff out, I am putting this project out here and invite feedback.
 Let me know in case I can help setting up the dashboard – that's how we can improve the documentation too. 😉
 
 ## 🗜 Prerequisites
@@ -99,5 +99,6 @@ yarn start
 Here are some other projects with similar goals, you might want to have a look at those too:
 
 - [RTL – Ride the Lightning](https://github.com/ShahanaFarooqui/RTL)
+- [lnd-admin](https://github.com/janoside/lnd-admin)
 - [lndash](https://github.com/djmelik/lndash)
 - [ln-dashboard](https://github.com/PatrickLemke/ln-dashboard)
