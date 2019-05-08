@@ -39,7 +39,7 @@ Here are some example screenshots:
 I will make this easier at some point, but for now …
 SSH into your full node and execute the following commands:
 
-```sh
+```bash
 # create a new directory for the dashboard
 mkdir dashboard
 cd dashboard
@@ -52,7 +52,7 @@ npm init @blitzbank/dashboard
 vim .env
 
 # start the app
-blitzbank
+npx blitzbank
 ```
 
 You will most likely need to [setup a process manager](https://expressjs.com/en/advanced/best-practice-performance.html#ensure-your-app-automatically-restarts) to keep the app running.

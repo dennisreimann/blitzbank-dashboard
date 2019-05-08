@@ -29,7 +29,7 @@ requireComponent.keys().forEach(fileName => {
     const { data: info } = await API.get('lnd/info')
     const initialState = { lnd: { state: { info } } }
     const store = createStore(initialState)
-    const wsSocketUrl = `ws://localhost:${process.env.VUE_APP_SOCKET_PORT}`
+    const wsSocketUrl = `ws://${window.location.hostname}:${process.env.VUE_APP_SOCKET_PORT}`
 
     Vue.use(VueSocket, wsSocketUrl, { store: store, format: 'json' })
 

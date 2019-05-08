@@ -63,13 +63,15 @@ import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Dot from '../components/Dot'
 import Loading from '../components/Loading'
+import Progress from '../components/Progress'
 
 export default {
   components: {
     AttributeList,
     Attribute,
+    Dot,
     Loading,
-    Dot
+    Progress
   },
 
   computed: {
