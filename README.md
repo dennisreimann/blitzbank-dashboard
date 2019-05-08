@@ -56,9 +56,9 @@ npx blitzbank
 ```
 
 You will most likely need to [setup a process manager](https://expressjs.com/en/advanced/best-practice-performance.html#ensure-your-app-automatically-restarts) to keep the app running.
-I will improve the deployment too – promised!
+See the start script section below.
 
-## ✨ Environment variables
+### ✨ Environment variables
 
 These env variables should be set:
 
@@ -79,7 +79,48 @@ You also need to define the credentials for the dashboard and API requests:
 - `AUTH_USERNAME`
 - `AUTH_PASSWORD`
 
-### 🛠 Development Setup
+### 🚀 Start Script
+
+On a Linux system you can use the service manager Systemd.
+Add the following service configuration to a file named `/etc/systemd/system/dashboard.service`:
+
+```ini
+[Unit]
+Description=Full Node Dashboard
+
+[Service]
+Type=simple
+
+# YOUR ADJUSTMENT START HERE:
+ExecStart=/usr/bin/npx blitzbank # the npx path might need adjustment: use `which npx` to find the location
+WorkingDirectory=/home/admin/dashboard # absolute path to the dashboard folder
+User=admin  # your user
+Group=admin # your group
+# YOUR ADJUSTMENT END HERE.
+
+Environment=NODE_ENV=production
+StandardInput=null
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Note that you have to set the values in the `YOUR ADJUSTMENT` part.
+
+After having created the file you can enable the service using the following command:
+
+```bash
+# one time enabling of the service
+sudo systemctl enable dashboard.service
+
+# after that you can use commands like start, stop, restart or status
+sudo systemctl start dashboard.service
+```
+
+## 🛠 Development Setup
 
 Dependencies are managed via [Yarn](https://yarnpkg.com/).
 Once you have Yarn installed and this repo cloned, you can setup the packages:
