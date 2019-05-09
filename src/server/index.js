@@ -3,8 +3,8 @@
   uses the shared server config for the API, adds production
   config, mounts the UI and launches an express app.
 */
-const { resolve } = require('path')
 const { readFileSync } = require('fs')
+const { join, resolve } = require('path')
 const { createServer } = require('https')
 const basicAuth = require('express-basic-auth')
 const history = require('connect-history-api-fallback')
@@ -36,9 +36,12 @@ app.use(history())
 // Dashboard UI
 // https://cli.vuejs.org/guide/deployment.html
 const publicPath = resolve(__dirname, '../../dist')
-const staticConf = { maxAge: '1y', etag: false }
+const staticConf = { maxAge: '1y', etag: false };
 
-app.use(express.static(publicPath, staticConf))
+['img', 'css', 'js'].forEach(dir => {
+  app.use(express.static(join(publicPath, dir), staticConf))
+})
+app.use(express.static(publicPath))
 
 // Go 🚀
 server.listen(SERVER_PORT, () => console.debug(`⚡️ Server running on port ${SERVER_PORT}!`))
