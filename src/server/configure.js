@@ -8,7 +8,7 @@ const { Server: WebSocketServer } = require('ws')
 const { json } = require('express')
 const { subscribeToGraph, subscribeToInvoices, subscribeToTransactions } = require('ln-service/push')
 const { lnd } = require('./services/lnd')
-const { SOCKET_PORT, NODE_ENV } = require('./env')
+const { NODE_ENV } = require('./env')
 
 const { log } = console
 
@@ -23,7 +23,7 @@ module.exports = (app, server) => {
 
   // Websocket
   // https://github.com/websockets/ws/blob/master/doc/ws.md
-  const socket = new WebSocketServer({ port: SOCKET_PORT })
+  const socket = new WebSocketServer({ server })
   const wss = [socket]
 
   // LN Service Push methods

@@ -18,7 +18,6 @@ const {
   AUTH_USERNAME,
   AUTH_PASSWORD,
   SERVER_PORT = 4000,
-  SOCKET_PORT = 4001,
   NODE_ENV = 'production'
 } = process.env
 
@@ -39,6 +38,5 @@ module.exports = {
   AUTH_USERNAME,
   AUTH_PASSWORD,
   SERVER_PORT,
-  SOCKET_PORT,
   NODE_ENV
 }

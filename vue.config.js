@@ -1,11 +1,14 @@
 const configure = require('./src/server/configure')
-const { SOCKET_PORT } = require('./src/server/env')
-
-// https://cli.vuejs.org/guide/mode-and-env.html#modes
-process.env.VUE_APP_SOCKET_PORT = SOCKET_PORT
+const { SERVER_PORT } = require('./src/server/env')
 
 module.exports = {
   devServer: {
+    port: SERVER_PORT,
+
+    // as we are also using a websocket for the backend app, disable inline mode.
+    // https://github.com/webpack/docs/wiki/webpack-dev-server#combining-with-an-existing-server
+    inline: false,
+
     // https://webpack.js.org/configuration/dev-server/#devserverafter
     after (app, devServer) {
       // HACK: Using setTimeout is a pretty nasty way to get ahold of

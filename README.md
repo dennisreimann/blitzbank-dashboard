@@ -72,7 +72,6 @@ These env variables should be set:
 - `LND_CERT_BASE64` - the base64 encoded string of the `tls.cert` file
 - `LND_MACAROON_BASE64` - the base64 encoded string of the macaroon file
 - `SERVER_PORT` - default: `4000`
-- `SOCKET_PORT` - default: `4001`
 
 You also need to define the credentials for the dashboard and API requests:
 
