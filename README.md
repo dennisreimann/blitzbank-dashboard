@@ -121,6 +121,14 @@ sudo systemctl enable dashboard.service
 sudo systemctl start dashboard.service
 ```
 
+### ✨ Upgrading
+
+To install the latest version use the following command:
+
+```bash
+npm install @blitzbank/dashboard@latest
+```
+
 ## 🛠 Development Setup
 
 Dependencies are managed via [Yarn](https://yarnpkg.com/).
