@@ -17,6 +17,8 @@ const {
   // App
   AUTH_USERNAME,
   AUTH_PASSWORD,
+  SSL_KEY_PATH,
+  SSL_CERT_PATH,
   SERVER_PORT = 4000,
   NODE_ENV = 'production'
 } = process.env
@@ -24,6 +26,7 @@ const {
 assert(BITCOIND_RPC_USER && BITCOIND_RPC_PASSWORD, 'Provide the BITCOIND_RPC_USER and BITCOIND_RPC_PASSWORD environment variables.')
 assert(LND_CERT_BASE64 && LND_MACAROON_BASE64, 'Provide the LND_CERT_BASE64 and LND_MACAROON_BASE64 environment variables.')
 assert(AUTH_USERNAME && AUTH_PASSWORD, 'Provide the AUTH_USERNAME and AUTH_PASSWORD environment variables.')
+assert(SSL_KEY_PATH && SSL_CERT_PATH, 'Provide the SSL_KEY_PATH and SSL_CERT_PATH environment variables.')
 
 module.exports = {
   BITCOIND_RPC_USER,
@@ -37,6 +40,8 @@ module.exports = {
   LND_MACAROON_BASE64,
   AUTH_USERNAME,
   AUTH_PASSWORD,
+  SSL_KEY_PATH,
+  SSL_CERT_PATH,
   SERVER_PORT,
   NODE_ENV
 }

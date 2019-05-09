@@ -72,6 +72,8 @@ These env variables should be set:
 - `LND_CERT_BASE64` - the base64 encoded string of the `tls.cert` file
 - `LND_MACAROON_BASE64` - the base64 encoded string of the macaroon file
 - `SERVER_PORT` - default: `4000`
+- `SSL_CERT_PATH`
+- `SSL_KEY_PATH`
 
 You also need to define the credentials for the dashboard and API requests:
 
@@ -127,6 +129,8 @@ Once you have Yarn installed and this repo cloned, you can setup the packages:
 ```bash
 yarn install
 ```
+
+Use [mkcert](https://github.com/FiloSottile/mkcert) to setup the SSL certificates.
 
 Create a build and rebuild on file change.
 

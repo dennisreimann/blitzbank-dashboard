@@ -29,7 +29,10 @@ requireComponent.keys().forEach(fileName => {
     const { data: info } = await API.get('lnd/info')
     const initialState = { lnd: { state: { info } } }
     const store = createStore(initialState)
-    const wsSocketUrl = `ws://${window.location.host}`
+
+    // FIXME: Remove the scheme once this gets merged and released:
+    // https://github.com/nathantsoi/vue-native-websocket/pull/90
+    const wsSocketUrl = `wss://${window.location.host}`
 
     Vue.use(VueSocket, wsSocketUrl, { store: store, format: 'json' })
 

@@ -4,15 +4,19 @@
   config, mounts the UI and launches an express app.
 */
 const { resolve } = require('path')
-const { createServer } = require('http')
+const { readFileSync } = require('fs')
+const { createServer } = require('https')
 const basicAuth = require('express-basic-auth')
 const history = require('connect-history-api-fallback')
 const express = require('express')
 const configure = require('./configure')
-const { SERVER_PORT, AUTH_USERNAME, AUTH_PASSWORD } = require('./env')
+const { SERVER_PORT, AUTH_USERNAME, AUTH_PASSWORD, SSL_CERT_PATH, SSL_KEY_PATH } = require('./env')
 
 const app = express()
-const server = createServer(app)
+
+const cert = readFileSync(SSL_CERT_PATH)
+const key = readFileSync(SSL_KEY_PATH)
+const server = createServer({ cert, key }, app)
 
 // Security
 app.use(basicAuth({

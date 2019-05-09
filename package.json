@@ -55,14 +55,14 @@
     "express": "4.16.4",
     "express-basic-auth": "1.2.0",
     "filesize": "4.1.2",
-    "ln-service": "36.3.2",
+    "ln-service": "36.4.0",
     "morgan": "1.9.1",
     "register-service-worker": "1.6.2",
-    "systeminformation": "4.1.6",
+    "systeminformation": "4.3.0",
     "vue": "2.6.10",
     "vue-native-websocket": "2.0.13",
     "vue-router": "3.0.6",
-    "vuex": "3.1.0",
+    "vuex": "3.1.1",
     "ws": "7.0.0"
   },
   "devDependencies": {
@@ -85,7 +85,7 @@
     "rimraf": "2.6.3",
     "standard": "12.0.1",
     "vue-template-compiler": "2.6.10",
-    "webpack": "4.30.0"
+    "webpack": "4.31.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
