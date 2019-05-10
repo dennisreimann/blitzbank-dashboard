@@ -58,6 +58,7 @@
     "ln-service": "36.4.0",
     "lndconnect": "^0.2.5",
     "morgan": "1.9.1",
+    "qrcode": "^1.3.3",
     "register-service-worker": "1.6.2",
     "systeminformation": "4.3.0",
     "vue": "2.6.10",

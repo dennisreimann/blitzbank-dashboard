@@ -1,3 +1,4 @@
+const qrcode = require('qrcode')
 const btcUnits = require('bitcoin-units')
 const camelizeKeys = require('camelize-keys')
 const { format: formatConnectionUrl, decodeMacaroon, decodeCert, encodeMacaroon, encodeCert } = require('lndconnect')
@@ -8,6 +9,13 @@ const { PUBLIC_HOST, LND_RPC_PORT, LND_MACAROON_BASE64, LND_CERT_BASE64 } = requ
 btcUnits.setDisplay('satoshi', { format: '{amount} sats' })
 
 const formatAt = dateString => formatDate(parseDate(dateString), 'YYYY-MM-DD HH:MM:SS')
+const connectionUrl = formatConnectionUrl({
+  host: `${PUBLIC_HOST}:${LND_RPC_PORT}`,
+  cert: encodeCert(decodeCert(LND_CERT_BASE64)),
+  macaroon: encodeMacaroon(decodeMacaroon(LND_MACAROON_BASE64))
+})
+let connectionQRCode
+(async function () { connectionQRCode = await qrcode.toDataURL(connectionUrl) })()
 
 const decorate = async (result, fnName) => {
   result = camelizeKeys(result)
@@ -15,11 +23,8 @@ const decorate = async (result, fnName) => {
   switch (fnName) {
     case 'getWalletInfo':
       result.latestBlockRelative = distanceInWordsToNow(parseDate(result.latestBlockAt))
-      result.connectionUrl = formatConnectionUrl({
-        host: `${PUBLIC_HOST}:${LND_RPC_PORT}`,
-        cert: encodeCert(decodeCert(LND_CERT_BASE64)),
-        macaroon: encodeMacaroon(decodeMacaroon(LND_MACAROON_BASE64))
-      })
+      result.connectionUrl = connectionUrl
+      result.connectionQRCode = connectionQRCode
       break
 
     case 'getChainBalance':

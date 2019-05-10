@@ -1,7 +1,18 @@
 <template>
   <section>
     <h3>Connection</h3>
-    <pre>{{ info.connectionUrl }}</pre>
+
+    <FormButton
+      title="🔗 Copy connection URL"
+      :data-clipboard-text="info.connectionUrl"
+    />
+
+    <br>
+
+    <img
+      :src="info.connectionQRCode"
+      :alt="info.connectionUrl"
+    >
   </section>
 </template>
 
