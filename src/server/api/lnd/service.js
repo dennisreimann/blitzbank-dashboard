@@ -1,7 +1,9 @@
 const btcUnits = require('bitcoin-units')
 const camelizeKeys = require('camelize-keys')
+const { format: formatConnectionUrl, decodeMacaroon, decodeCert, encodeMacaroon, encodeCert } = require('lndconnect')
 const { distanceInWordsToNow, format: formatDate, parse: parseDate } = require('date-fns')
 const { lnd, lnService } = require('../../services/lnd')
+const { PUBLIC_HOST, LND_RPC_PORT, LND_MACAROON_BASE64, LND_CERT_BASE64 } = require('../../env')
 
 btcUnits.setDisplay('satoshi', { format: '{amount} sats' })
 
@@ -13,6 +15,11 @@ const decorate = async (result, fnName) => {
   switch (fnName) {
     case 'getWalletInfo':
       result.latestBlockRelative = distanceInWordsToNow(parseDate(result.latestBlockAt))
+      result.connectionUrl = formatConnectionUrl({
+        host: `${PUBLIC_HOST}:${LND_RPC_PORT}`,
+        cert: encodeCert(decodeCert(LND_CERT_BASE64)),
+        macaroon: encodeMacaroon(decodeMacaroon(LND_MACAROON_BASE64))
+      })
       break
 
     case 'getChainBalance':

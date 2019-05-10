@@ -74,6 +74,7 @@ These env variables should be set:
 - `SERVER_PORT` - default: `4000`
 - `SSL_CERT_PATH`
 - `SSL_KEY_PATH`
+- `PUBLIC_HOST` - public host name that is used for connecting via Zap, Joule, etc.
 
 You also need to define the credentials for the dashboard and API requests:
 

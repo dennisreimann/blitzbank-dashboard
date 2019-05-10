@@ -19,6 +19,7 @@ const {
   AUTH_PASSWORD,
   SSL_KEY_PATH,
   SSL_CERT_PATH,
+  PUBLIC_HOST,
   SERVER_PORT = 4000,
   NODE_ENV = 'production'
 } = process.env
@@ -43,5 +44,6 @@ module.exports = {
   SSL_KEY_PATH,
   SSL_CERT_PATH,
   SERVER_PORT,
+  PUBLIC_HOST,
   NODE_ENV
 }
