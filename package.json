@@ -1,7 +1,7 @@
 {
   "name": "@blitzbank/dashboard",
   "description": "Dashboard for your Bitcoind/LND full node.",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "homepage": "https://github.com/dennisreimann/blitzbank-dashboard",
