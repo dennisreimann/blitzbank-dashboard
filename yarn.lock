@@ -2652,10 +2652,10 @@ bitcoin-units@0.3.0:
   dependencies:
     big.js "^5.2.2"
 
-bitcoind-rpc@0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/bitcoind-rpc/-/bitcoind-rpc-0.7.2.tgz#7aed8f05bfba6d1edc9be45e25fd640c7a653d5c"
-  integrity sha512-3alq5pH4/mAdEscucew98ls0s7BEaDvKTuYW34nSkTsmTC7G9R7Xh+ABXOxeVBfG/+rKfyQLmFAm2aRq92tJqw==
+bitcoind-rpc@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/bitcoind-rpc/-/bitcoind-rpc-0.8.0.tgz#cb35ddf04de604d07eb578efdcafd92a1de49c24"
+  integrity sha512-LAz52AjjZN2/yAdT2agDEMfEVJXcJazJm0kisShhcCJQ/NGFeKROkizGho1QHmvv/aN3bndkOM9zycMPeAa06A==
 
 bitcoinjs-lib@5.0.3:
   version "5.0.3"
@@ -7982,15 +7982,14 @@ ln-service@36.4.0:
     secp256k1 "3.7.0"
     ws "7.0.0"
 
-lndconnect@^0.2.5:
+lndconnect@dennisreimann/node-lndconnect:
   version "0.2.5"
-  resolved "https://registry.yarnpkg.com/lndconnect/-/lndconnect-0.2.5.tgz#e2fb48751612c0dcf5255e5c2dd0b31c5946a0d7"
-  integrity sha512-uh5ELLl/CyTdjmTOr0b5RSt0aiwfpDRffQbaPg0ZPC7+HJ8y3C+2e2sNSOk2oRzlhD0HgikuW7QihFXg+Y+xKw==
+  resolved "https://codeload.github.com/dennisreimann/node-lndconnect/tar.gz/b23882d448001738c564a499f98fe7b839c7b946"
   dependencies:
     base64url "^3.0.1"
     decode-uri-component "^0.2.0"
     strict-uri-encode "^2.0.0"
-    untildify "^3.0.3"
+    untildify "^4.0.0"
 
 load-json-file@^1.0.0:
   version "1.1.0"
@@ -10284,7 +10283,7 @@ q@^1.1.2:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
-qrcode@^1.3.3:
+qrcode@1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/qrcode/-/qrcode-1.3.3.tgz#5ef50c0c890cffa1897f452070f0f094936993de"
   integrity sha512-SH7V13AcJusH3GT8bMNOGz4w0L+LjcpNOU/NiOgtBhT/5DoWeZE6D5ntMJnJ84AMkoaM4kjJJoHoh9g++8lWFg==
@@ -11785,10 +11784,10 @@ synchronous-promise@^2.0.6:
   resolved "https://registry.yarnpkg.com/synchronous-promise/-/synchronous-promise-2.0.7.tgz#3574b3d2fae86b145356a4b89103e1577f646fe3"
   integrity sha512-16GbgwTmFMYFyQMLvtQjvNWh30dsFe1cAW5Fg1wm5+dg84L9Pe36mftsIRU95/W2YsISxsz/xq4VB23sqpgb/A==
 
-systeminformation@4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-4.3.0.tgz#a0c324e4b6ef4c737a28aa935668d49dde45f67d"
-  integrity sha512-Qnu5KFsjMMUatUgfLpBreai+Tk+HPCq6uUzHFzUB5TYtonNAGnZjDc/svWNQbB8/rGK9W5iU7/n7RjdRHpvB8w==
+systeminformation@4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-4.4.1.tgz#38b99489f7c489592b22aafe2ecd866b966b4338"
+  integrity sha512-rZhqXp8+Scjb7e9w68WwgiagHDrTU0hiIXHPb9eystJMymrSxC43ibtAps1afjyB+zymrdaa92z//9Nl6f9sDg==
 
 table@4.0.2:
   version "4.0.2"
@@ -12298,10 +12297,10 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
-untildify@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/untildify/-/untildify-3.0.3.tgz#1e7b42b140bcfd922b22e70ca1265bfe3634c7c9"
-  integrity sha512-iSk/J8efr8uPT/Z4eSUywnqyrQU7DSdMfdqK4iWEaUVVmcP5JcnpRqmVMwcwcnmI1ATFNgC5V90u09tBynNFKA==
+untildify@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/untildify/-/untildify-4.0.0.tgz#2bc947b953652487e4600949fb091e3ae8cd919b"
+  integrity sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==
 
 unzip-response@^2.0.1:
   version "2.0.1"
