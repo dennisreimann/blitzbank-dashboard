@@ -1,18 +1,19 @@
 const qrcode = require('qrcode')
 const btcUnits = require('bitcoin-units')
 const camelizeKeys = require('camelize-keys')
-const { format: formatConnectionUrl, decodeMacaroon, decodeCert, encodeMacaroon, encodeCert } = require('lndconnect')
+const { format: formatConnectionUrl, encodeMacaroon, encodeCert } = require('lndconnect')
 const { distanceInWordsToNow, format: formatDate, parse: parseDate } = require('date-fns')
 const { lnd, lnService } = require('../../services/lnd')
 const { PUBLIC_HOST, LND_RPC_PORT, LND_MACAROON_BASE64, LND_CERT_BASE64 } = require('../../env')
 
 btcUnits.setDisplay('satoshi', { format: '{amount} sats' })
 
+const base64Decode = b64 => Buffer.from(b64, 'base64')
 const formatAt = dateString => formatDate(parseDate(dateString), 'YYYY-MM-DD HH:MM:SS')
 const connectionUrl = formatConnectionUrl({
   host: `${PUBLIC_HOST}:${LND_RPC_PORT}`,
-  cert: encodeCert(decodeCert(LND_CERT_BASE64)),
-  macaroon: encodeMacaroon(decodeMacaroon(LND_MACAROON_BASE64))
+  cert: encodeCert(base64Decode(LND_CERT_BASE64)),
+  macaroon: encodeMacaroon(base64Decode(LND_MACAROON_BASE64))
 })
 let connectionQRCode
 (async function () { connectionQRCode = await qrcode.toDataURL(connectionUrl) })()
