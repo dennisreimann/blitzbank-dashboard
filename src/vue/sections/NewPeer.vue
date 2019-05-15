@@ -76,12 +76,4 @@ export default {
 #peerAddress {
   width: 70ch;
 }
-
-.removePeer {
-  margin-left: var(--space-m);
-}
-
-.peerMessage {
-  color: var(--color-failure);
-}
 </style>

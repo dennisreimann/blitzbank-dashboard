@@ -86,6 +86,7 @@ export default {
 
     async removePeer (peer) {
       try {
+        Vue.delete(this.peerInfo, peer.publicKey)
         await this.disconnectPeer({ pubkey: peer.publicKey })
       } catch (error) {
         const { response } = error
@@ -103,9 +104,5 @@ export default {
 <style scoped>
 .channelForm {
   margin-top: var(--space-l);
-}
-
-.peerMessage {
-  color: var(--color-failure);
 }
 </style>

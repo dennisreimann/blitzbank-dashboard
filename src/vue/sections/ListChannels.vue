@@ -150,6 +150,7 @@ export default {
     async close (channel) {
       try {
         const peer = this.peerForPublicKey(channel.partnerPublicKey)
+        Vue.delete(this.channelInfo, channel.id)
         await this.closeChannel({
           id: channel.id,
           socket: peer.socket,
