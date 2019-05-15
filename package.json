@@ -33,9 +33,10 @@
     "blitzbank"
   ],
   "scripts": {
-    "start": "rimraf assets dist && nodemon --exec 'vue-cli-service serve'",
+    "cleanup": "rimraf dist",
+    "start": "yarn cleanup && nodemon --exec 'vue-cli-service serve'",
     "start:prod": "$npm_package_bin_blitzbank",
-    "build": "vue-cli-service build",
+    "build": "yarn cleanup && vue-cli-service build",
     "release": "yarn lint && yarn test && yarn build && yarn publish",
     "lint": "vue-cli-service lint",
     "test": "jest --clearCache && vue-cli-service test:unit",
