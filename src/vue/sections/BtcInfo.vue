@@ -78,11 +78,11 @@ export default {
     ...mapState('btc', ['blockchainInfo']),
 
     isSynced () {
-      return this.verificationPercent >= 100
+      return this.verificationPercent >= 99
     },
 
     verificationPercent () {
-      return this.blockchainInfo.verificationprogress * 100
+      return Math.round(this.blockchainInfo.verificationprogress * 100)
     },
 
     bip9Softforks () {
@@ -95,6 +95,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>
