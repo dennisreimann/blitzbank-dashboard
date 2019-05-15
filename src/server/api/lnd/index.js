@@ -21,7 +21,7 @@ const ROUTES = [
 
   // Addresses
   ['post', '/addresses', 'createChainAddress', req => {
-    const format = req.body.format || 'np2wpkh'
+    const format = req.body.format
     return { format }
   }],
 

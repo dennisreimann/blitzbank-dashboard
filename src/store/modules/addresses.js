@@ -5,8 +5,8 @@ const state = {
 }
 
 const actions = {
-  async createAddress ({ commit }) {
-    const { data: { address } } = await API.post('lnd/addresses')
+  async createAddress ({ commit }, payload) {
+    const { data: { address } } = await API.post('lnd/addresses', payload)
     commit('setNewAddress', address)
   }
 }
