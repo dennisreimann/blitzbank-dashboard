@@ -3,7 +3,6 @@
 Here‘s to the ***#reckless***! ⚡️
 Dashboard for your Bitcoind/LND full node.
 
-[![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
 [![npm](https://img.shields.io/npm/v/@blitzbank/dashboard.svg)](https://www.npmjs.com/package/@blitzbank/dashboard)
 [![Known Vulnerabilities](https://snyk.io/test/github/dennisreimann/blitzbank-dashboard/badge.svg)](https://snyk.io/test/github/dennisreimann/blitzbank-dashboard)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
@@ -146,6 +145,14 @@ Create a build and rebuild on file change.
 ```bash
 yarn start
 ```
+
+## 👛 Tip jar
+
+[![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
+
+<a target="_blank" rel="noopener noreferrer" href="https://tiphub.io/user/249025030/tip?site=github">
+  <img src="https://tiphub.io/static/images/tip-button-dark.png" alt="Tip dennisreimann on TipHub" height="42">
+</a>
 
 ## 🖖 Alternatives
 
