@@ -87,7 +87,7 @@
 <script>
 import Vue from 'vue'
 import { mapActions, mapState } from 'vuex'
-import peers from '../../mixins/peers'
+import peers from '../mixins/peers'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Dot from '../components/Dot'

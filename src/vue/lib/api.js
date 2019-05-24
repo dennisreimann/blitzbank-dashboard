@@ -6,7 +6,10 @@ const headers = {
 }
 const config = {
   headers,
-  withCredentials: true
+  withCredentials: true,
+  validateStatus (status) {
+    return status < 500 // Reject only if the status code is greater than or equal to 500
+  }
 }
 
 const post = (path, payload = {}) => axios.post(`/api/${path}`, payload, config)

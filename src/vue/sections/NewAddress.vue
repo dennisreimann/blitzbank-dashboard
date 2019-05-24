@@ -58,7 +58,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import { field } from '../../lib/form'
+import { field } from '../lib/form'
 import Info, { FAILURE } from '../components/Info'
 
 const FORMAT_OPTIONS = [

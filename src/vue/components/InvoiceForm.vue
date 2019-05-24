@@ -48,7 +48,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { field } from '../../lib/form'
+import { field } from '../lib/form'
 import Info, { FAILURE, SUCCESS } from './Info'
 
 export default {

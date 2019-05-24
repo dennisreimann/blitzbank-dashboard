@@ -83,7 +83,6 @@
       </FormField>
       <FormButton
         type="submit"
-        class="createChannel"
         title="⚡️ Create channel"
         :disabled="buttonDisabled"
       />
@@ -99,7 +98,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import { field } from '../../lib/form'
+import { field } from '../lib/form'
 import Info, { FAILURE, SUCCESS } from './Info'
 import Loading from './Loading'
 

@@ -82,8 +82,8 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import { field, reset } from '../../lib/form'
-import peers from '../../mixins/peers'
+import { field, reset } from '../lib/form'
+import peers from '../mixins/peers'
 import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Dot from '../components/Dot'

@@ -19,19 +19,16 @@
         <div class="options">
           <FormButton
             title="🧬 Create channel"
-            class="createChannel"
             @click.native="toggleChannelForm(peer)"
           />
           <FormButton
             title="🤜 Remove"
-            class="removePeer"
             @click.native="removePeer(peer)"
           />
         </div>
         <Info
           v-if="peerInfo[peer.publicKey]"
           v-bind="peerInfo[peer.publicKey]"
-          class="peerInfo"
         />
         <ChannelForm
           v-if="displayChannelForm(peer)"

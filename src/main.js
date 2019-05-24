@@ -2,11 +2,11 @@
 import Vue from 'vue'
 import VueSocket from 'vue-native-websocket'
 import Clipboard from 'clipboard'
-import router from './router'
-import createStore from './store'
+import router from './vue/router'
+import createStore from './vue/store'
 import App from './vue/App'
-import API from './lib/api'
-import './lib/registerServiceWorker'
+import API from './vue/lib/api'
+import './vue/lib/registerServiceWorker'
 
 Vue.config.productionTip = false
 
