@@ -8,7 +8,7 @@ const {
 
 const socket = `${host}:${rpcPort}`
 const options = { socket, cert, macaroon }
-const lnd = lnService.lightningDaemon(options)
+const { lnd } = lnService.authenticatedLndGrpc(options)
 
 module.exports = {
   lnd,
