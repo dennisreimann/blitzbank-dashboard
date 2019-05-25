@@ -1,24 +1,16 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Home from '../../../src/vue/pages/Home'
-import createStore from '../../../src/store'
+import store from '../../../src/vue/store'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
 describe('Home.vue', () => {
-  let store
-
   beforeEach(() => {
-    store = createStore({
-      lnd: {
-        state: {
-          info: {
-            alias: 'alice'
-          }
-        }
-      }
+    store.commit('lnd/setInfo', {
+      alias: 'alice'
     })
   })
 
