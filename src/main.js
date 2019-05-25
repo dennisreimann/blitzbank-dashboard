@@ -3,9 +3,8 @@ import Vue from 'vue'
 import VueSocket from 'vue-native-websocket'
 import Clipboard from 'clipboard'
 import router from './vue/router'
-import createStore from './vue/store'
+import store from './vue/store'
 import App from './vue/App'
-import API from './vue/lib/api'
 import './vue/lib/registerServiceWorker'
 
 Vue.config.productionTip = false
@@ -26,9 +25,7 @@ requireComponent.keys().forEach(fileName => {
 // Load info via API, if that works init the app
 (async () => {
   try {
-    const { data: info } = await API.get('lnd/info')
-    const initialState = { lnd: { state: { info } } }
-    const store = createStore(initialState)
+    await store.dispatch('checkSession')
 
     // FIXME: Remove the scheme once this gets merged and released:
     // https://github.com/nathantsoi/vue-native-websocket/pull/90

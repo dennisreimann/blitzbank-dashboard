@@ -21,7 +21,8 @@ const {
   SSL_CERT_PATH,
   PUBLIC_HOST,
   SERVER_PORT = 4000,
-  NODE_ENV = 'production'
+  NODE_ENV = 'production',
+  SESSION_SECRET = Math.random().toString(36).replace(/[^a-z]+/g, '')
 } = process.env
 
 assert(BITCOIND_RPC_USER && BITCOIND_RPC_PASSWORD, 'Provide the BITCOIND_RPC_USER and BITCOIND_RPC_PASSWORD environment variables.')
@@ -45,5 +46,6 @@ module.exports = {
   SSL_CERT_PATH,
   SERVER_PORT,
   PUBLIC_HOST,
-  NODE_ENV
+  NODE_ENV,
+  SESSION_SECRET
 }

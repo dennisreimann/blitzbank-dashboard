@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
 
 Vue.use(Router)
 
-export default new Router({
+const LOGIN_PATH = '/login'
+
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -11,6 +14,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: () => import(/* webpackChunkName: "home" */ '../pages/Home')
+    },
+    {
+      path: LOGIN_PATH,
+      name: 'login',
+      component: () => import(/* webpackChunkName: "login" */ '../pages/Login')
     },
     {
       path: '/peers',
@@ -44,3 +52,13 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, origin, next) => {
+  if (to.path !== LOGIN_PATH && !store.getters.isAuthenticated) {
+    next({ path: LOGIN_PATH })
+  } else {
+    next()
+  }
+})
+
+export default router

@@ -4,11 +4,14 @@
   prod: Express -> ./index.js
 */
 const logger = require('morgan')
+const passport = require('passport')
+const session = require('express-session')
+const { Strategy: LocalStrategy } = require('passport-local')
 const { Server: WebSocketServer } = require('ws')
 const { json } = require('express')
 const { subscribeToGraph, subscribeToInvoices, subscribeToTransactions } = require('ln-service/push')
 const { lnd } = require('./services/lnd')
-const { NODE_ENV } = require('./env')
+const { NODE_ENV, AUTH_USERNAME, AUTH_PASSWORD, SESSION_SECRET } = require('./env')
 
 const { log } = console
 
@@ -17,8 +20,37 @@ module.exports = (app, server) => {
   const isDevelopment = NODE_ENV === 'development'
   app.use(logger(isDevelopment ? 'dev' : 'combined'))
 
-  // API
+  // Body parsing
   app.use(json())
+
+  // Session and login
+  // http://www.passportjs.org/docs/configure/
+  // http://www.passportjs.org/packages/passport-local/
+  passport.use(new LocalStrategy(
+    (username, password, done) =>
+      username === AUTH_USERNAME && password === AUTH_PASSWORD
+        ? done(null, { username })
+        : done(null, false)
+  ))
+
+  passport.serializeUser(({ username }, done) => {
+    done(null, username)
+  })
+  passport.deserializeUser((username, done) => {
+    done(null, { username })
+  })
+
+  app.use(session({
+    secret: SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+    cookie: { secure: true }
+  }))
+
+  app.use(passport.initialize())
+  app.use(passport.session())
+
+  // API
   app.use('/api', require('./api'))
 
   // Websocket

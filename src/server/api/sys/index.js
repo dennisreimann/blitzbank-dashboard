@@ -1,8 +1,9 @@
 const { Router } = require('express')
 const router = Router()
 const system = require('./service')
+const authenticate = require('../../auth')
 
-router.get('/', async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   try {
     const [osInfo, info, memory, disk, network] = await Promise.all([
       system.retrieveOsInfo(),

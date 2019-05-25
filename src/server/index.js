@@ -6,11 +6,11 @@
 const { readFileSync } = require('fs')
 const { join, resolve } = require('path')
 const { createServer } = require('https')
-const basicAuth = require('express-basic-auth')
+
 const history = require('connect-history-api-fallback')
 const express = require('express')
 const configure = require('./configure')
-const { SERVER_PORT, AUTH_USERNAME, AUTH_PASSWORD, SSL_CERT_PATH, SSL_KEY_PATH } = require('./env')
+const { SERVER_PORT, SSL_CERT_PATH, SSL_KEY_PATH } = require('./env')
 
 const app = express()
 
@@ -18,17 +18,11 @@ const cert = readFileSync(SSL_CERT_PATH)
 const key = readFileSync(SSL_KEY_PATH)
 const server = createServer({ cert, key }, app)
 
-// Security
-app.use(basicAuth({
-  users: { [AUTH_USERNAME]: AUTH_PASSWORD },
-  challenge: true,
-  realm: 'Full Node Dashboard'
-}))
-
-app.disable('x-powered-by')
-
-// API and Websockets
+// Session, API and Websockets
 configure(app, server)
+
+// Security
+app.disable('x-powered-by')
 
 // Single Page App
 app.use(history())

@@ -32,10 +32,11 @@ export default {
   },
 
   methods: {
-    ...mapActions('lnd', ['loadBalance']),
+    ...mapActions('lnd', ['loadBalance', 'loadInfo']),
     ...mapActions('btc', ['loadBlockchainInfo']),
 
     fetchData () {
+      if (this.info === undefined) this.loadInfo()
       if (this.balance === undefined) this.loadBalance()
       if (this.blockchainInfo === undefined) this.loadBlockchainInfo()
     }

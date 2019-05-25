@@ -2,6 +2,7 @@
 const { Router } = require('express')
 const service = require('./service')
 const { NODE_ENV } = require('../../env')
+const authenticate = require('../../auth')
 
 const router = Router()
 
@@ -71,7 +72,7 @@ const ROUTES = [
 ]
 
 ROUTES.map(([method, route, rpc, getPayload]) => {
-  router[method](route, async (req, res) => {
+  router[method](route, authenticate, async (req, res) => {
     const payload = getPayload && getPayload(req)
     try {
       if (NODE_ENV === 'development' && payload) console.debug(payload)

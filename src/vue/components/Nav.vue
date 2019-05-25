@@ -1,59 +1,66 @@
 <template>
   <nav>
-    <NavItem
-      to="/"
-      icon="⚡️"
-      title="Home"
-      class="item home"
-      exact
-    />
-    <NavItem
-      to="/peers"
-      icon="🦸‍♂️"
-      title="Peers"
-      class="item peers"
-    />
-    <NavItem
-      to="/channels"
-      icon="🧬"
-      title="Channels"
-      class="item channels"
-    />
-    <NavItem
-      to="/invoices"
-      icon="🧾"
-      title="Invoices"
-      class="item invoices"
-    />
-    <NavItem
-      to="/payments"
-      icon="💸"
-      title="Payments"
-      class="item payments"
-    />
-    <NavItem
-      to="/tools"
-      icon="🧰"
-      title="Tools"
-      class="item tools"
-      exact
-    />
-    <NavItem
-      to="/system"
-      icon="⚙️"
-      title="System Information"
-      class="item system"
-      exact
-    />
+    <template v-if="isAuthenticated">
+      <NavItem
+        to="/"
+        icon="⚡️"
+        title="Home"
+        class="item home"
+        exact
+      />
+      <NavItem
+        to="/peers"
+        icon="🦸‍♂️"
+        title="Peers"
+        class="item peers"
+      />
+      <NavItem
+        to="/channels"
+        icon="🧬"
+        title="Channels"
+        class="item channels"
+      />
+      <NavItem
+        to="/invoices"
+        icon="🧾"
+        title="Invoices"
+        class="item invoices"
+      />
+      <NavItem
+        to="/payments"
+        icon="💸"
+        title="Payments"
+        class="item payments"
+      />
+      <NavItem
+        to="/tools"
+        icon="🧰"
+        title="Tools"
+        class="item tools"
+        exact
+      />
+      <NavItem
+        to="/system"
+        icon="⚙️"
+        title="System Information"
+        class="item system"
+        exact
+      />
+    </template>
   </nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import NavItem from './NavItem'
 
 export default {
   components: {
     NavItem
+  },
+
+  computed: {
+    ...mapGetters(['isAuthenticated'])
   }
 }
 </script>
