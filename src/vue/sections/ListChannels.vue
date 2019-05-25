@@ -13,24 +13,23 @@
             {{ channel.id }} {{ channel.isPrivate ? "🔒" : "" }}
           </h4>
           <AttributeList>
+            <Attribute label="Balance in sats">
+              <Meter
+                :percent="percent(channel, channel.localBalance)"
+                :value="channel.localBalance"
+                title="Local"
+              />
+              <Meter
+                :flipped="true"
+                :percent="percent(channel, channel.remoteBalance)"
+                :value="channel.remoteBalance"
+                title="Remote"
+              />
+            </Attribute>
             <Attribute
               label="Capacity"
               :value="channel.capacity"
             />
-            <Attribute
-              label="Local sats"
-              :value="channel.localBalance"
-            />
-            <Attribute
-              label="Remote sats"
-              :value="channel.remoteBalance"
-            />
-            <Attribute label="Balance">
-              <Progress
-                class="balance"
-                :percent="Math.round(channel.localBalance * 100 / channel.capacity)"
-              />
-            </Attribute>
           </AttributeList>
           <div class="options">
             <FormButton
@@ -92,9 +91,9 @@ import AttributeList from '../components/AttributeList'
 import Attribute from '../components/Attribute'
 import Dot from '../components/Dot'
 import Loading from '../components/Loading'
+import Meter from '../components/Meter'
 import Info, { FAILURE } from '../components/Info'
 import InvoiceForm from '../components/InvoiceForm'
-import Progress from '../components/Progress'
 
 export default {
   components: {
@@ -103,7 +102,7 @@ export default {
     Dot,
     Info,
     Loading,
-    Progress,
+    Meter,
     InvoiceForm
   },
 
@@ -126,6 +125,10 @@ export default {
 
   methods: {
     ...mapActions('channels', ['closeChannel']),
+
+    percent (channel, balance) {
+      return Math.round(balance * 100 / channel.capacity)
+    },
 
     toggleInvoiceForm (channel) {
       this.invoiceFormKey = this.displayInvoiceForm(channel)
