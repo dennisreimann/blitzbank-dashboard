@@ -40,7 +40,9 @@
     "release": "yarn lint && yarn test && yarn build && yarn publish",
     "lint": "vue-cli-service lint",
     "test": "jest --clearCache && vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e"
+    "test:e2e": "vue-cli-service test:e2e",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "axios": "0.18.0",
@@ -67,7 +69,8 @@
     "vue-native-websocket": "2.0.13",
     "vue-router": "3.0.6",
     "vuex": "3.1.1",
-    "ws": "7.0.0"
+    "ws": "7.0.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "@babel/core": "7.4.5",
@@ -103,5 +106,6 @@
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "snyk": true
 }
