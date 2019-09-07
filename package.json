@@ -39,7 +39,7 @@
     "build": "npm run cleanup && vue-cli-service build",
     "release": "npm run lint && npm test && npm run build && npm run publish",
     "lint": "vue-cli-service lint",
-    "test": "jest --clearCache && vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
@@ -81,7 +81,7 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.3",
-    "babel-jest": "24.9.0",
+    "babel-jest": "23.6.0",
     "eslint": "6.3.0",
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-vue": "5.2.3",
