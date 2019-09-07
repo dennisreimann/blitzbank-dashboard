@@ -1,4 +1,4 @@
-import lnd from '../../../src/server/api/lnd/service'
+import lnd from '../../../server/api/lnd/service'
 
 describe('LND Service', () => {
   it('gets result', async () => {

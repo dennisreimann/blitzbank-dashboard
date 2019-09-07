@@ -13,14 +13,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "src/server/index.js",
+  "main": "server/index.js",
   "bin": {
     "blitzbank": "./bin/blitzbank.sh"
   },
   "files": [
     "bin",
     "dist",
-    "src/server"
+    "server"
   ],
   "keywords": [
     "bitcoin",

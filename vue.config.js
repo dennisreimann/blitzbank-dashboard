@@ -1,6 +1,6 @@
 const { readFileSync } = require('fs')
-const configure = require('./src/server/configure')
-const { SERVER_PORT, SSL_CERT_PATH, SSL_KEY_PATH } = require('./src/server/env')
+const configure = require('./server/configure')
+const { SERVER_PORT, SSL_CERT_PATH, SSL_KEY_PATH } = require('./server/env')
 
 module.exports = {
   devServer: {

@@ -1,6 +1,6 @@
 {
   "watch": [
-    "src/server",
+    "server",
     "vue.config.js"
   ]
 }

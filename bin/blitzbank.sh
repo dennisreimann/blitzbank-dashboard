@@ -2,7 +2,7 @@
 
 export NODE_ENV=production
 
-dir=src/server
+dir=server
 
 if [ -d "$dir" ]
 then

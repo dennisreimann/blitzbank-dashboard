@@ -1,4 +1,4 @@
-import lnd from '../../../src/server/api/btc/service'
+import lnd from '../../../server/api/btc/service'
 
 describe('BTC Service', () => {
   it('gets result', async () => {
