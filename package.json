@@ -34,14 +34,13 @@
   ],
   "scripts": {
     "cleanup": "rimraf dist",
-    "start": "yarn cleanup && nodemon --exec 'vue-cli-service serve'",
+    "start": "npm run cleanup && nodemon --exec 'vue-cli-service serve'",
     "start:prod": "$npm_package_bin_blitzbank",
-    "build": "yarn cleanup && vue-cli-service build",
-    "release": "yarn lint && yarn test && yarn build && yarn publish",
+    "build": "npm run cleanup && vue-cli-service build",
+    "release": "npm run lint && npm test && npm run build && npm run publish",
     "lint": "vue-cli-service lint",
     "test": "jest --clearCache && vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
-    "deps": "yarn upgrade-interactive --latest"
+    "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
     "axios": "0.19.0",

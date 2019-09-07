@@ -131,11 +131,10 @@ npm install @blitzbank/dashboard@latest
 
 ## 🛠 Development Setup
 
-Dependencies are managed via [Yarn](https://yarnpkg.com/).
-Once you have Yarn installed and this repo cloned, you can setup the packages:
+Install dependencies:
 
 ```bash
-yarn install
+npm install
 ```
 
 Use [mkcert](https://github.com/FiloSottile/mkcert) to setup the SSL certificates.
@@ -143,7 +142,7 @@ Use [mkcert](https://github.com/FiloSottile/mkcert) to setup the SSL certificate
 Create a build and rebuild on file change.
 
 ```bash
-yarn start
+npm start
 ```
 
 ## 👛 Tip jar
