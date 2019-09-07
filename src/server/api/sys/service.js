@@ -2,7 +2,7 @@ const { promisify } = require('util')
 const childProcess = require('child_process')
 const si = require('systeminformation')
 const axios = require('axios')
-const { format: formatDate, distanceInWordsToNow } = require('date-fns')
+const { format: formatDate, formatDistanceToNow } = require('date-fns')
 const fileSize = require('filesize')
 const execute = promisify(childProcess.exec)
 
@@ -41,8 +41,8 @@ const retrieveInfo = async () => {
 
     return {
       externalIP,
-      time: formatDate(time, 'YYYY-MM-DD HH:mm'),
-      uptime: distanceInWordsToNow(upSince)
+      time: formatDate(time, 'yyyy-MM-dd HH:mm'),
+      uptime: formatDistanceToNow(upSince)
     }
   } catch (err) {
     console.warn('Failed to retrieve info:', err)

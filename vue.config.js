@@ -13,7 +13,7 @@ module.exports = {
 
     // as we are also using a websocket for the backend app, disable inline mode.
     // https://github.com/webpack/docs/wiki/webpack-dev-server#combining-with-an-existing-server
-    inline: false,
+    // inline: false,
 
     // https://webpack.js.org/configuration/dev-server/#devserverafter
     after (app, devServer) {

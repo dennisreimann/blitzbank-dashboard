@@ -2,14 +2,14 @@ const qrcode = require('qrcode')
 const btcUnits = require('bitcoin-units')
 const camelizeKeys = require('camelize-keys')
 const { format: formatConnectionUrl, encodeMacaroon, encodeCert } = require('lndconnect')
-const { distanceInWordsToNow, format: formatDate, parse: parseDate } = require('date-fns')
+const { formatDistanceToNow, format: formatDate, parseISO: parseDate } = require('date-fns')
 const { lnd, lnService } = require('../../services/lnd')
 const { PUBLIC_HOST, LND_RPC_PORT, LND_MACAROON_BASE64, LND_CERT_BASE64 } = require('../../env')
 
 btcUnits.setDisplay('satoshi', { format: '{amount} sats' })
 
 const base64Decode = b64 => Buffer.from(b64, 'base64')
-const formatAt = dateString => formatDate(parseDate(dateString), 'YYYY-MM-DD HH:MM:SS')
+const formatAt = dateString => formatDate(parseDate(dateString), 'yyyy-MM-dd HH:MM:SS')
 const connectionUrl = formatConnectionUrl({
   host: `${PUBLIC_HOST}:${LND_RPC_PORT}`,
   cert: encodeCert(base64Decode(LND_CERT_BASE64)),
@@ -23,7 +23,8 @@ const decorate = async (result, fnName) => {
 
   switch (fnName) {
     case 'getWalletInfo':
-      result.latestBlockRelative = distanceInWordsToNow(parseDate(result.latestBlockAt))
+      console.log(result.latestBlockAt)
+      result.latestBlockRelative = formatDistanceToNow(parseDate(result.latestBlockAt))
       result.connectionUrl = connectionUrl
       result.connectionQRCode = connectionQRCode
       break

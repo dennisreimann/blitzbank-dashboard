@@ -14,10 +14,10 @@ const { lnd } = require('./services/lnd')
 const { NODE_ENV, AUTH_USERNAME, AUTH_PASSWORD, SESSION_SECRET } = require('./env')
 
 const { log } = console
+const isDevelopment = NODE_ENV === 'development'
 
 module.exports = (app, server) => {
   // Logging
-  const isDevelopment = NODE_ENV === 'development'
   app.use(logger(isDevelopment ? 'dev' : 'combined'))
 
   // Body parsing
@@ -36,6 +36,7 @@ module.exports = (app, server) => {
   passport.serializeUser(({ username }, done) => {
     done(null, username)
   })
+
   passport.deserializeUser((username, done) => {
     done(null, { username })
   })
