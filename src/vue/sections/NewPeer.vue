@@ -58,7 +58,7 @@ export default {
       } catch (error) {
         const { response } = error
         const msg = response ? response.data : error.message
-        this.peerAddress.message = response.data
+        this.peerAddress.message = msg
         this.peerAddress.isValid = false
         this.$refs.peerAddressInput.focus()
         console.error(msg) // eslint-disable-line no-console

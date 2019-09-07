@@ -1,9 +1,12 @@
 <template>
   <main>
-    <h1>{{ info.alias }}</h1>
+    <template v-if="info">
+      <h1>{{ info.alias }}</h1>
 
-    <LndPanel />
-    <BtcPanel />
+      <LndPanel />
+      <BtcPanel />
+    </template>
+    <Loading v-else />
   </main>
 </template>
 
@@ -11,11 +14,13 @@
 import { mapState, mapActions } from 'vuex'
 import BtcPanel from '../components/BtcPanel'
 import LndPanel from '../components/LndPanel'
+import Loading from '../components/Loading'
 
 export default {
   components: {
     BtcPanel,
-    LndPanel
+    LndPanel,
+    Loading
   },
 
   computed: {
