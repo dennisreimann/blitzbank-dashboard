@@ -2,24 +2,32 @@
   <section>
     <h3>Connection</h3>
 
-    <FormButton
-      title="🔗 Copy connection URL"
-      :data-clipboard-text="info.connectionUrl"
-    />
+    <template v-if="info">
+      <FormButton
+        title="🔗 Copy connection URL"
+        :data-clipboard-text="info.connectionUrl"
+      />
 
-    <br>
+      <br>
 
-    <img
-      :src="info.connectionQRCode"
-      :alt="info.connectionUrl"
-    >
+      <img
+        :src="info.connectionQRCode"
+        :alt="info.connectionUrl"
+      >
+    </template>
+    <Loading v-else />
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Loading from '../components/Loading'
 
 export default {
+  components: {
+    Loading
+  },
+
   computed: {
     ...mapState('lnd', ['info'])
   }

@@ -23,7 +23,8 @@ export default {
 
   computed: {
     ...mapState('btc', ['blockchainInfo']),
-    ...mapState('system', ['info'])
+    ...mapState('lnd', { lndInfo: 'info' }),
+    ...mapState('system', { systemInfo: 'info' })
   },
 
   watch: {
@@ -35,12 +36,17 @@ export default {
   },
 
   methods: {
+    ...mapActions('lnd', {
+      loadBalance: 'loadBalance',
+      loadLndInfo: 'loadInfo'
+    }),
     ...mapActions('btc', ['loadBlockchainInfo']),
     ...mapActions('system', ['loadSystemInfo']),
 
     fetchData () {
       if (this.blockchainInfo === undefined) this.loadBlockchainInfo()
-      if (this.info === undefined) this.loadSystemInfo()
+      if (this.systemInfo === undefined) this.loadSystemInfo()
+      if (this.lndInfo === undefined) this.loadLndInfo()
     }
   }
 }
