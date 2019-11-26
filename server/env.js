@@ -20,6 +20,7 @@ const {
   SSL_KEY_PATH,
   SSL_CERT_PATH,
   PUBLIC_HOST,
+  SERVER_HOST,
   SERVER_PORT = 4000,
   NODE_ENV = 'production',
   SESSION_SECRET = Math.random().toString(36).replace(/[^a-z]+/g, '')
@@ -44,6 +45,7 @@ module.exports = {
   AUTH_PASSWORD,
   SSL_KEY_PATH,
   SSL_CERT_PATH,
+  SERVER_HOST,
   SERVER_PORT,
   PUBLIC_HOST,
   NODE_ENV,

@@ -7,7 +7,6 @@ const logger = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
 const { Strategy: LocalStrategy } = require('passport-local')
-const { Server: WebSocketServer } = require('ws')
 const { json } = require('express')
 const { subscribeToGraph, subscribeToInvoices, subscribeToTransactions } = require('ln-service/push')
 const { lnd } = require('./services/lnd')
@@ -16,7 +15,7 @@ const { NODE_ENV, AUTH_USERNAME, AUTH_PASSWORD, SESSION_SECRET } = require('./en
 const { log } = console
 const isDevelopment = NODE_ENV === 'development'
 
-module.exports = (app, server) => {
+module.exports = (app, server, socket) => {
   // Logging
   app.use(logger(isDevelopment ? 'dev' : 'combined'))
 
@@ -54,13 +53,11 @@ module.exports = (app, server) => {
   // API
   app.use('/api', require('./api'))
 
-  // Websocket
+  // Websocket for LN Service Push methods
   // https://github.com/websockets/ws/blob/master/doc/ws.md
-  const socket = new WebSocketServer({ server })
+  // https://github.com/alexbosworth/ln-service/tree/master/push
   const wss = [socket]
 
-  // LN Service Push methods
-  // https://github.com/alexbosworth/ln-service/tree/master/push
   subscribeToGraph({ lnd, log, wss })
   subscribeToInvoices({ lnd, log, wss })
   subscribeToTransactions({ lnd, log, wss })

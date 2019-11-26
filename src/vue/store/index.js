@@ -52,7 +52,6 @@ export default new Vuex.Store({
       // https://github.com/alexbosworth/ln-service/blob/master/lightning/subscribe_to_graph.js
       console.debug('socket', message.type, message)
 
-      // https://github.com/alexbosworth/ln-service/blob/master/lightning/conf/row_types.json
       switch (message.type) {
         case 'balances':
           refreshBalance(this)

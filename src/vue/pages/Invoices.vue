@@ -34,7 +34,7 @@ export default {
   },
 
   watch: {
-    '$route': 'fetchData'
+    $route: 'fetchData'
   },
 
   created () {

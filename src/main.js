@@ -45,6 +45,6 @@ requireComponent.keys().forEach(fileName => {
       })
   } catch (error) {
     console.error(error)
-    document.querySelector(mount).innerHTML = `Could not initialize app: Fetching data failed.`
+    document.querySelector(mount).innerHTML = 'Could not initialize app: Fetching data failed.'
   }
 })()

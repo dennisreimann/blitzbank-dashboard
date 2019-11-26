@@ -22,9 +22,8 @@ The app requires at least Node.js 10.13 (tracking the latest active Node.js LTS 
 This guarantees a reasonable level of backwards compatibility.
 
 You will need a Bitcoin and LND full node to run the app.
-For development you can use the
-[bitstein-test-env](https://medium.com/@bitstein/setting-up-a-bitcoin-lightning-network-test-environment-ab967167594a) or its
-[dockerized version](https://github.com/JeffVandrewJr/bitstein-test-env).
+For development you can use the [Polar](https://github.com/jamaljsr/polar)
+app, which spins up Lightning networks for local app development and testing.
 
 ## 🖥 Screenshots
 
