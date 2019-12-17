@@ -22,8 +22,8 @@ module.exports = {
 
     // https://webpack.js.org/configuration/dev-server/#devserveronlistening
     onListening (devServer) {
-      const { app, socketServer, listeningApp: server } = devServer
-      configure(app, server, socketServer)
+      const { app, listeningApp: server, socketServer: { wsServer } } = devServer
+      configure(app, server, wsServer)
     }
   }
 }

@@ -15,7 +15,7 @@ const { NODE_ENV, AUTH_USERNAME, AUTH_PASSWORD, SESSION_SECRET } = require('./en
 const { log } = console
 const isDevelopment = NODE_ENV === 'development'
 
-module.exports = (app, server, socket) => {
+module.exports = (app, server, socketServer) => {
   // Logging
   app.use(logger(isDevelopment ? 'dev' : 'combined'))
 
@@ -56,8 +56,12 @@ module.exports = (app, server, socket) => {
   // Websocket for LN Service Push methods
   // https://github.com/websockets/ws/blob/master/doc/ws.md
   // https://github.com/alexbosworth/ln-service/tree/master/push
-  const wss = [socket]
+  const wss = [socketServer]
 
+  // FIXME: "I believe that error is related to doing a subscription
+  // or call to the API before LND is fully started and is a relatively
+  // benign error where you can just retry"
+  // https://github.com/alexbosworth/ln-service/issues/108#issuecomment-559879822
   subscribeToGraph({ lnd, log, wss })
   subscribeToInvoices({ lnd, log, wss })
   subscribeToTransactions({ lnd, log, wss })
