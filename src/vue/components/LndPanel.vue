@@ -33,9 +33,6 @@
         <div v-if="balance.chainBalance > 100000000">
           = {{ balance.chainBalanceBtc }}
         </div>
-        <div v-else-if="balance.chainBalance > 100000">
-          = {{ balance.chainBalanceMbtc }}
-        </div>
       </Attribute>
       <Attribute
         v-if="balance && balance.pendingChainBalance"
@@ -44,9 +41,6 @@
         {{ balance.pendingChainBalanceSats }}
         <div v-if="balance.chainBalance > 100000000">
           = {{ balance.pendingChainBalanceBtc }}
-        </div>
-        <div v-else-if="balance.chainBalance > 100000">
-          = {{ balance.pendingChainBalanceMbtc }}
         </div>
       </Attribute>
     </AttributeList>

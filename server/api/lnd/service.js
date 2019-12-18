@@ -32,30 +32,22 @@ const decorate = async (result, fnName) => {
     case 'getChainBalance':
       const satsChain = btcUnits(result.chainBalance, 'satoshi')
       result.chainBalanceSats = satsChain.format()
-      result.chainBalanceBit = satsChain.to('bit').format()
-      result.chainBalanceMbtc = satsChain.to('mbtc').format()
       result.chainBalanceBtc = satsChain.to('btc').format()
       break
 
     case 'getPendingChainBalance':
       const satsChainPending = btcUnits(result.pendingChainBalance, 'satoshi')
       result.pendingChainBalanceSats = satsChainPending.format()
-      result.pendingChainBalanceBit = satsChainPending.to('bit').format()
-      result.pendingChainBalanceMbtc = satsChainPending.to('mbtc').format()
       result.pendingChainBalanceBtc = satsChainPending.to('btc').format()
       break
 
     case 'getChannelBalance':
       const satsChannel = btcUnits(result.channelBalance, 'satoshi')
       result.channelBalanceSats = satsChannel.format()
-      result.channelBalanceBit = satsChannel.to('bit').format()
-      result.channelBalanceMbtc = satsChannel.to('mbtc').format()
       result.channelBalanceBtc = satsChannel.to('btc').format()
 
       const satsChannelPending = btcUnits(result.pendingBalance, 'satoshi')
       result.pendingChannelBalanceSats = satsChannelPending.format()
-      result.pendingChannelBalanceBit = satsChannelPending.to('bit').format()
-      result.pendingChannelBalanceMbtc = satsChannelPending.to('mbtc').format()
       result.pendingChannelBalanceBtc = satsChannelPending.to('btc').format()
       break
 
