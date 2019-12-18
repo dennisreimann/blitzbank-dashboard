@@ -6,7 +6,6 @@
 const { readFileSync } = require('fs')
 const { join, resolve } = require('path')
 const { createServer } = require('https')
-const { verifyClient } = require('ln-service/push')
 
 const WebSocket = require('ws')
 const express = require('express')
@@ -18,7 +17,7 @@ const app = express()
 const cert = readFileSync(SSL_CERT_PATH)
 const key = readFileSync(SSL_KEY_PATH)
 const server = createServer({ cert, key }, app)
-const socketServer = new WebSocket.Server({ server, verifyClient })
+const socketServer = new WebSocket.Server({ server })
 
 // Session, API and Websockets
 configure(app, server, socketServer)

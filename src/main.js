@@ -10,6 +10,7 @@ import './vue/lib/registerServiceWorker'
 Vue.config.productionTip = false
 
 const mount = '#app'
+const socketPath = process.env.NODE_ENV === 'development' ? '/sockjs-node' : '/'
 
 // Automatic Global Registration of Base Components
 // https://vuejs.org/v2/guide/components-registration.html#Automatic-Global-Registration-of-Base-Components
@@ -29,7 +30,7 @@ requireComponent.keys().forEach(fileName => {
 
     // FIXME: Remove the scheme once this gets merged and released:
     // https://github.com/nathantsoi/vue-native-websocket/pull/90
-    const wsSocketUrl = `wss://${window.location.host}`
+    const wsSocketUrl = `wss://${window.location.host}${socketPath}`
 
     Vue.use(VueSocket, wsSocketUrl, { store: store, format: 'json' })
 

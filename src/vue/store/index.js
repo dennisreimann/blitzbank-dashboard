@@ -49,33 +49,23 @@ export default new Vuex.Store({
     },
     // default handler called for all methods
     SOCKET_ONMESSAGE (state, message) {
+      console.debug('socket', message)
+
+      // https://github.com/alexbosworth/ln-service/blob/master/lightning/subscribe_to_transactions.js
+      if (message.address || message.tokens) {
+        refreshBalance(this)
+        refreshInvoices(this)
+        refreshPayments(this)
+      }
+
       // https://github.com/alexbosworth/ln-service/blob/master/lightning/subscribe_to_graph.js
-      console.debug('socket', message.type, message)
+      if (message.public_key && message.updated_at) {
+        refreshPeers(this)
+      }
 
-      switch (message.type) {
-        case 'balances':
-          refreshBalance(this)
-          break
-
-        case 'peer':
-        case 'node_update':
-          refreshPeers(this)
-          break
-
-        case 'channel':
-        case 'channel_status':
-        case 'channel_update':
-        case 'closed_channel':
-          refreshChannels(this)
-          break
-
-        case 'invoice':
-        case 'channel_transaction':
-          refreshInvoices(this)
-          refreshPayments(this)
-          refreshChannels(this)
-          refreshBalance(this)
-          break
+      // https://github.com/alexbosworth/ln-service/blob/master/lightning/subscribe_to_channels.js
+      if (message.transaction_id || message.partner_public_key) {
+        refreshChannels(this)
       }
     },
     setUser (state, user) {

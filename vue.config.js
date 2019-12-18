@@ -18,7 +18,6 @@ module.exports = {
 
     // https://webpack.js.org/configuration/dev-server/#devservertransportmode
     transportMode: 'ws',
-    sockPath: '/',
 
     // https://webpack.js.org/configuration/dev-server/#devserveronlistening
     onListening (devServer) {
