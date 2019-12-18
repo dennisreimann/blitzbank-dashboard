@@ -1,6 +1,6 @@
 {
   "name": "@blitzbank/dashboard",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Dashboard for your Bitcoind/LND full node.",
   "author": "Dennis Reimann <mail@dennisreimann.de> (https://dennisreimann.de)",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "cleanup": "rimraf dist",
-    "release": "npm run lint && npm test && npm run build && npm run publish",
+    "release": "npm run lint && npm test && npm run build && npm publish",
     "start": "npm run cleanup && nodemon --exec 'vue-cli-service serve'",
     "start:prod": "$npm_package_bin_blitzbank",
     "test:e2e": "vue-cli-service test:e2e"
