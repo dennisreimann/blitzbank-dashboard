@@ -86,11 +86,11 @@ export default {
     },
 
     bip9Softforks () {
-      return this.blockchainInfo ? Object.keys(this.blockchainInfo.bip9Softforks).reduce((result, key) => {
-        return {
-          ...result, [key]: this.blockchainInfo.bip9Softforks[key].status
-        }
-      }, {}) : {}
+      return this.blockchainInfo && this.blockchainInfo.bip9Softforks
+        ? Object.keys(this.blockchainInfo.bip9Softforks).reduce((result, key) =>
+          Object.assign({}, result, { [key]: this.blockchainInfo.bip9Softforks[key].status }
+            , {}))
+        : {}
     }
   }
 }
