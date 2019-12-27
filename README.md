@@ -144,6 +144,8 @@ Create a build and rebuild on file change.
 npm start
 ```
 
+See this [blog post](https://d11n.net/bitcoin-lnd-rpc-api-express.html) for details on some of the technicak decisions.
+
 ## 👛 Tip jar
 
 [![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@dennisreimann/F0918E)](https://tippin.me/@dennisreimann)
